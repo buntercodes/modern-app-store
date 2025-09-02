@@ -4,6 +4,7 @@ import "./globals.css";
 import { AppDataProvider } from "./context/AppDataContext";
 import { AuthProvider } from "./context/AuthContext";
 import ErrorBoundary from "./components/ErrorBoundary";
+import Footer from "./components/Footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -79,7 +80,12 @@ export default function RootLayout({
         <ErrorBoundary>
           <AppDataProvider>
             <AuthProvider>
-              {children}
+              <div className="min-h-screen flex flex-col">
+                <main className="flex-1">
+                  {children}
+                </main>
+                <Footer />
+              </div>
             </AuthProvider>
           </AppDataProvider>
         </ErrorBoundary>

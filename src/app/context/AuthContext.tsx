@@ -22,7 +22,9 @@ interface AuthContextType {
   sendPasswordRecovery: (email: string) => Promise<boolean>;
   updatePassword: (password: string, oldPassword?: string) => Promise<boolean>;
   updateUserRole: (role: 'user' | 'developer' | 'admin') => Promise<boolean>;
+  clearError: () => void;
   loading: boolean;
+  authLoading: boolean;
   error: string | null;
 }
 
@@ -42,7 +44,8 @@ interface AuthProviderProps {
 
 export function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUser] = useState<User | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const [authLoading, setAuthLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   // Convert AppwriteUser to our User interface
@@ -60,7 +63,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     // Check for existing session on mount
     const checkAuth = async () => {
       try {
-        setLoading(true);
+        setAuthLoading(true);
         setError(null);
         
         const appwriteUser = await appwriteAuth.getCurrentUser();
@@ -72,7 +75,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
         // Don't set error state for auth check failures - this is normal for unauthenticated users
         // Only log the error for debugging purposes
       } finally {
-        setLoading(false);
+        setAuthLoading(false);
       }
     };
 
@@ -179,6 +182,10 @@ export function AuthProvider({ children }: AuthProviderProps) {
     }
   };
 
+  const clearError = (): void => {
+    setError(null);
+  };
+
   const value: AuthContextType = {
     user,
     isAuthenticated: !!user,
@@ -189,7 +196,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
     sendPasswordRecovery,
     updatePassword,
     updateUserRole,
+    clearError,
     loading,
+    authLoading,
     error
   };
 

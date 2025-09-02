@@ -1,13 +1,15 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '../context/AuthContext';
+import { useFormInteraction } from '../hooks/useFormInteraction';
 import { Eye, EyeOff, User, Mail, Lock, AlertCircle, CheckCircle, ArrowLeft } from 'lucide-react';
 
 export default function RegisterPage() {
   const router = useRouter();
-  const { register, loading, error } = useAuth();
+  const { register, loading, error, clearError } = useAuth();
+  const { hasInteracted, formRef } = useFormInteraction();
   
   const [formData, setFormData] = useState({
     name: '',
@@ -20,6 +22,24 @@ export default function RegisterPage() {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [validationErrors, setValidationErrors] = useState<string[]>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Clear any existing errors when component mounts
+  useEffect(() => {
+    clearError();
+  }, [clearError]);
+
+  // Get CSS classes for input styling
+  const getInputClasses = () => {
+    const baseClasses = "block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent text-sm text-black transition-colors";
+    const autofillClasses = hasInteracted ? "input-show-autofill" : "input-hide-autofill";
+    return `${baseClasses} input-text-black ${autofillClasses}`;
+  };
+
+  const getPasswordInputClasses = () => {
+    const baseClasses = "block w-full pl-10 pr-10 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent text-sm text-black transition-colors";
+    const autofillClasses = hasInteracted ? "input-show-autofill" : "input-hide-autofill";
+    return `${baseClasses} input-text-black ${autofillClasses}`;
+  };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -86,6 +106,8 @@ export default function RegisterPage() {
     }
   };
 
+
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
@@ -114,7 +136,7 @@ export default function RegisterPage() {
         </div>
 
         {/* Form */}
-        <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
+        <form ref={formRef} className="mt-8 space-y-6" onSubmit={handleSubmit}>
           <div className="space-y-4">
             {/* Name Field */}
             <div>
@@ -132,7 +154,7 @@ export default function RegisterPage() {
                   required
                   value={formData.name}
                   onChange={handleInputChange}
-                  className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent text-sm transition-colors"
+                  className={getInputClasses()}
                   placeholder="Enter your full name"
                 />
               </div>
@@ -154,7 +176,7 @@ export default function RegisterPage() {
                   required
                   value={formData.email}
                   onChange={handleInputChange}
-                  className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent text-sm transition-colors"
+                  className={getInputClasses()}
                   placeholder="Enter your email address"
                 />
               </div>
@@ -176,7 +198,7 @@ export default function RegisterPage() {
                   required
                   value={formData.password}
                   onChange={handleInputChange}
-                  className="block w-full pl-10 pr-10 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent text-sm transition-colors"
+                  className={getPasswordInputClasses()}
                   placeholder="Create a password"
                 />
                 <button
@@ -209,7 +231,7 @@ export default function RegisterPage() {
                   required
                   value={formData.confirmPassword}
                   onChange={handleInputChange}
-                  className="block w-full pl-10 pr-10 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent text-sm transition-colors"
+                  className={getPasswordInputClasses()}
                   placeholder="Confirm your password"
                 />
                 <button

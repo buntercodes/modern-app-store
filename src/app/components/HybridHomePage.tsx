@@ -93,7 +93,7 @@ export default function HybridHomePage({ initialData }: HybridHomePageProps) {
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         {/* SEO Hero Section */}
-        <section className="bg-gradient-to-br from-gray-50 to-white rounded-2xl p-8 md:p-12 mb-16 border border-gray-100 shadow-sm">
+        <section className="bg-gradient-to-br from-gray-50 to-white rounded-2xl p-8 md:p-12 mb-16 border-2 border-gray-200 shadow-lg">
           <div className="text-center">
             <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
               Download Free Android APKs – Latest Apps & Games
@@ -106,19 +106,19 @@ export default function HybridHomePage({ initialData }: HybridHomePageProps) {
                 All our APK files are verified, secure, and regularly updated to ensure you get the best experience.
               </p>
             </div>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Link 
-                href="/categories"
-                className="bg-green-500 text-white px-8 py-4 rounded-lg hover:bg-green-600 transition-colors font-medium text-lg flex items-center justify-center shadow-lg hover:shadow-xl"
+                href="/android-app-categories"
+                className="bg-green-500 text-white px-5 py-2.5 rounded-lg hover:bg-green-600 transition-colors font-medium text-base flex items-center justify-center shadow-lg hover:shadow-xl"
               >
-                <Search className="w-5 h-5 mr-2" />
+                <Search className="w-4 h-4 mr-2" />
                 Browse by Category
               </Link>
               <Link 
                 href="/search"
-                className="border border-gray-300 text-gray-700 px-8 py-4 rounded-lg hover:bg-gray-50 transition-colors font-medium text-lg flex items-center justify-center shadow-md hover:shadow-lg"
+                className="border border-gray-300 text-gray-700 px-5 py-2.5 rounded-lg hover:bg-gray-50 transition-colors font-medium text-base flex items-center justify-center shadow-md hover:shadow-lg"
               >
-                <Filter className="w-5 h-5 mr-2" />
+                <Filter className="w-4 h-4 mr-2" />
                 Search Apps
               </Link>
             </div>
@@ -315,59 +315,6 @@ export default function HybridHomePage({ initialData }: HybridHomePageProps) {
           </div>
         </section>
       </main>
-
-      {/* Footer */}
-      <footer className="bg-gray-50 border-t border-gray-200 py-12 mt-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            <div>
-              <div className="flex items-center space-x-3 mb-4">
-                <div className="w-8 h-8 bg-green-500 rounded-lg flex items-center justify-center">
-                  <Smartphone className="w-5 h-5 text-white" />
-                </div>
-                <span className="text-xl font-medium text-gray-900">Modern App Store</span>
-              </div>
-              <p className="text-gray-600 text-sm">
-                Discover amazing apps and tools for every need. Your trusted source for quality applications and free Android APK downloads.
-              </p>
-            </div>
-            
-            <div>
-              <h3 className="font-medium text-gray-900 mb-4 text-sm">Discover</h3>
-              <ul className="space-y-2 text-gray-600 text-sm">
-                <li><Link href="/" className="hover:text-gray-900 transition-colors">Featured Apps</Link></li>
-                <li><Link href="/search" className="hover:text-gray-900 transition-colors">New Releases</Link></li>
-                <li><Link href="/search?filter=trending" className="hover:text-gray-900 transition-colors">Top Charts</Link></li>
-                <li><Link href="/categories" className="hover:text-gray-900 transition-colors">Categories</Link></li>
-              </ul>
-            </div>
-            
-            <div>
-              <h3 className="font-medium text-gray-900 mb-4 text-sm">Support</h3>
-              <ul className="space-y-2 text-gray-600 text-sm">
-                <li><a href="#" className="hover:text-gray-900 transition-colors">Help Center</a></li>
-                <li><a href="#" className="hover:text-gray-900 transition-colors">Contact Us</a></li>
-                <li><a href="#" className="hover:text-gray-900 transition-colors">Developer Portal</a></li>
-                <li><a href="#" className="hover:text-gray-900 transition-colors">Privacy Policy</a></li>
-              </ul>
-            </div>
-            
-            <div>
-              <h3 className="font-medium text-gray-900 mb-4 text-sm">Connect</h3>
-              <ul className="space-y-2 text-gray-600 text-sm">
-                <li><a href="#" className="hover:text-gray-900 transition-colors">Twitter</a></li>
-                <li><a href="#" className="hover:text-gray-900 transition-colors">Facebook</a></li>
-                <li><a href="#" className="hover:text-gray-900 transition-colors">Instagram</a></li>
-                <li><a href="#" className="hover:text-gray-900 transition-colors">LinkedIn</a></li>
-              </ul>
-            </div>
-          </div>
-          
-          <div className="border-t border-gray-200 mt-8 pt-8 text-center text-gray-500 text-sm">
-            <p>&copy; 2024 Modern App Store. All rights reserved.</p>
-          </div>
-        </div>
-      </footer>
 
       {/* Background Data Updater - Only show on client side */}
       {isClient && (

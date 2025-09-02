@@ -69,3 +69,48 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: #a8a8a8;
 }
+
+/* Input text color utilities */
+.input-text-black {
+  color: #000000 !important;
+}
+
+.input-text-black::placeholder {
+  color: #9ca3af !important;
+  -webkit-text-fill-color: #9ca3af !important;
+  opacity: 1 !important;
+}
+
+/* Auto-fill hiding utilities */
+.input-hide-autofill {
+  -webkit-text-fill-color: transparent !important;
+  -webkit-box-shadow: 0 0 0 1000px white inset !important;
+}
+
+.input-hide-autofill::placeholder {
+  -webkit-text-fill-color: #9ca3af !important;
+  color: #9ca3af !important;
+  opacity: 1 !important;
+}
+
+.input-show-autofill {
+  -webkit-text-fill-color: #000000 !important;
+  -webkit-box-shadow: none !important;
+}
+
+/* Ensure user-typed text is always visible */
+.input-text-black:focus {
+  -webkit-text-fill-color: #000000 !important;
+  color: #000000 !important;
+}
+
+.input-text-black:focus::placeholder {
+  -webkit-text-fill-color: #9ca3af !important;
+  color: #9ca3af !important;
+  opacity: 1 !important;
+}
+
+.input-text-black:not(:placeholder-shown) {
+  -webkit-text-fill-color: #000000 !important;
+  color: #000000 !important;
+}

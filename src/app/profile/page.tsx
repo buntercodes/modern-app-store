@@ -1,4 +1,4 @@
-import { User, Settings, Download, Heart, Clock, Star, Play } from "lucide-react";
+import { User, Settings, Download, Heart, Clock, Star, Play, Edit, Grid3X3, List, Filter, Plus, Bell, CreditCard, HelpCircle, Shield } from "lucide-react";
 import Header from "../components/Header";
 
 export default function ProfilePage() {
@@ -88,9 +88,6 @@ export default function ProfilePage() {
               <div className="w-20 h-20 bg-gradient-to-br from-green-100 to-blue-100 rounded-full flex items-center justify-center">
                 <User className="w-10 h-10 text-green-600" />
               </div>
-              <button className="absolute bottom-0 right-0 w-7 h-7 bg-green-500 text-white rounded-full flex items-center justify-center hover:bg-green-600 transition-colors">
-                <Camera className="w-4 h-4" />
-              </button>
             </div>
             
             <div className="flex-1">
