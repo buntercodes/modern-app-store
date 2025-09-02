@@ -16,6 +16,7 @@ import {
   Star,
   AppWindow
 } from 'lucide-react';
+import Breadcrumb, { BreadcrumbItem } from '../../components/Breadcrumb';
 
 export default function AppManagementPage() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -67,6 +68,14 @@ export default function AppManagementPage() {
 
   return (
     <div className="space-y-8">
+      {/* Breadcrumb Navigation */}
+      <Breadcrumb 
+        items={[
+          { label: 'Admin', href: '/admin' },
+          { label: 'App Management', current: true }
+        ]} 
+      />
+
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
           <h1 className="text-3xl font-bold text-gray-900">App Management</h1>

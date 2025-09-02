@@ -5,7 +5,7 @@ import { Star, Download, TrendingUp, Smartphone, Search, Filter, ArrowRight, Ext
 import Header from "./Header";
 import AppCard from "./AppCard";
 import Link from "next/link";
-import BackgroundDataUpdater from "./BackgroundDataUpdater";
+
 
 interface HybridHomePageProps {
   initialData: {
@@ -23,9 +23,7 @@ export default function HybridHomePage({ initialData }: HybridHomePageProps) {
     setIsClient(true);
   }, []);
 
-  const handleDataUpdate = (newData: typeof initialData) => {
-    setAppsData(newData);
-  };
+
 
   // SEO-optimized category data with internal links
   const featuredCategories = [
@@ -316,10 +314,7 @@ export default function HybridHomePage({ initialData }: HybridHomePageProps) {
         </section>
       </main>
 
-      {/* Background Data Updater - Only show on client side */}
-      {isClient && (
-        <BackgroundDataUpdater onDataUpdate={handleDataUpdate} />
-      )}
+
     </div>
   );
 }

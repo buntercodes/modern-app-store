@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { AppDataProvider } from "./context/AppDataContext";
 import { AuthProvider } from "./context/AuthContext";
+import { SearchProvider } from "./context/SearchContext";
 import ErrorBoundary from "./components/ErrorBoundary";
 import Footer from "./components/Footer";
 
@@ -80,12 +81,14 @@ export default function RootLayout({
         <ErrorBoundary>
           <AppDataProvider>
             <AuthProvider>
-              <div className="min-h-screen flex flex-col">
-                <main className="flex-1">
-                  {children}
-                </main>
-                <Footer />
-              </div>
+              <SearchProvider>
+                <div className="min-h-screen flex flex-col">
+                  <main className="flex-1">
+                    {children}
+                  </main>
+                  <Footer />
+                </div>
+              </SearchProvider>
             </AuthProvider>
           </AppDataProvider>
         </ErrorBoundary>

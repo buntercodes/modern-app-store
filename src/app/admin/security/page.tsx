@@ -1,10 +1,19 @@
 "use client";
 
 import { Shield, AlertTriangle, Lock, Eye, Key } from 'lucide-react';
+import Breadcrumb, { BreadcrumbItem } from '../../components/Breadcrumb';
 
 export default function SecurityPage() {
   return (
     <div className="space-y-6">
+      {/* Breadcrumb Navigation */}
+      <Breadcrumb 
+        items={[
+          { label: 'Admin', href: '/admin' },
+          { label: 'Security', current: true }
+        ]} 
+      />
+
       <div className="sm:flex sm:items-center sm:justify-between">
         <div>
           <h1 className="text-2xl font-bold text-gray-900">Security</h1>

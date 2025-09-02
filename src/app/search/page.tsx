@@ -1,9 +1,72 @@
-import { Filter, Star, Download, Smartphone, Grid3X3, List, SlidersHorizontal, Play, MoreVertical, Share2, Bookmark } from "lucide-react";
+"use client";
+
+import { useState, useEffect, useCallback } from "react";
+import { useSearchParams } from "next/navigation";
+import { Filter, Star, Download, Smartphone, Grid3X3, List, SlidersHorizontal, Play, MoreVertical, Share2, Bookmark, Loader2, Search, X, Clock, TrendingUp } from "lucide-react";
 import Header from "../components/Header";
+import Breadcrumb, { BreadcrumbItem } from "../components/Breadcrumb";
+import { useSearch } from "../context/SearchContext";
+import AppCard from "../components/AppCard";
+import AppCardSkeleton from "../components/AppCardSkeleton";
 
 export default function SearchPage() {
-  // Mock search results - in real app this would come from API
-  const searchResults = [
+  const searchParams = useSearchParams();
+  const { searchResults, isLoading, error, performSearch, recentSearches } = useSearch();
+  
+  const [searchTerm, setSearchTerm] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('All Categories');
+  const [selectedPrice, setSelectedPrice] = useState('All Prices');
+  const [selectedRating, setSelectedRating] = useState(4.0);
+  const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
+  const [showFilters, setShowFilters] = useState(false);
+  const [sortBy, setSortBy] = useState('relevance');
+
+  // Get search term from URL
+  useEffect(() => {
+    const q = searchParams.get('q');
+    if (q) {
+      setSearchTerm(q);
+      performSearch(q, { limit: 50 });
+    }
+  }, [searchParams, performSearch]);
+
+  // Apply filters
+  const applyFilters = useCallback(() => {
+    if (searchTerm) {
+      const options: any = { limit: 50 };
+      
+      if (selectedCategory !== 'All Categories') {
+        options.category = selectedCategory;
+      }
+      
+      if (selectedPrice !== 'All Prices') {
+        options.price = selectedPrice.toLowerCase();
+      }
+      
+      if (selectedRating > 0) {
+        options.rating = selectedRating;
+      }
+      
+      performSearch(searchTerm, options);
+    }
+  }, [searchTerm, selectedCategory, selectedPrice, selectedRating, performSearch]);
+
+  // Apply filters when they change
+  useEffect(() => {
+    if (searchTerm) {
+      applyFilters();
+    }
+  }, [selectedCategory, selectedPrice, selectedRating, applyFilters]);
+
+  // Clear all filters
+  const clearFilters = () => {
+    setSelectedCategory('All Categories');
+    setSelectedPrice('All Prices');
+    setSelectedRating(4.0);
+  };
+
+  // Mock search results for fallback
+  const mockSearchResults = [
     {
       id: 1,
       name: "PhotoMaster Pro",
@@ -127,10 +190,31 @@ export default function SearchPage() {
       <Header />
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        {/* Breadcrumb Navigation */}
+        <Breadcrumb 
+          items={[
+            { label: 'Search Results', current: true }
+          ]} 
+        />
+
         {/* Search Header */}
         <div className="mb-6">
-          <h1 className="text-2xl font-bold text-gray-900 mb-2">Search Results</h1>
-          <p className="text-gray-600 text-sm">Found {searchResults.length} apps matching "photo editing"</p>
+          <h1 className="text-2xl font-bold text-gray-900 mb-2">
+            {searchTerm ? `Search Results for "${searchTerm}"` : 'Search Results'}
+          </h1>
+          {isLoading ? (
+            <p className="text-gray-600 text-sm flex items-center">
+              <Loader2 className="w-4 h-4 animate-spin mr-2" />
+              Searching...
+            </p>
+          ) : error ? (
+            <p className="text-red-600 text-sm">Error: {error}</p>
+          ) : (
+            <p className="text-gray-600 text-sm">
+              Found {searchResults.length} apps
+              {searchTerm && ` matching "${searchTerm}"`}
+            </p>
+          )}
         </div>
 
         <div className="flex flex-col lg:flex-row gap-6">
@@ -152,7 +236,8 @@ export default function SearchPage() {
                         type="radio"
                         name="category"
                         value={category}
-                        defaultChecked={category === "All Categories"}
+                        checked={selectedCategory === category}
+                        onChange={(e) => setSelectedCategory(e.target.value)}
                         className="text-green-500 focus:ring-green-500"
                       />
                       <span className="text-sm text-gray-700">{category}</span>
@@ -171,7 +256,8 @@ export default function SearchPage() {
                         type="radio"
                         name="price"
                         value={range}
-                        defaultChecked={range === "All Prices"}
+                        checked={selectedPrice === range}
+                        onChange={(e) => setSelectedPrice(e.target.value)}
                         className="text-green-500 focus:ring-green-500"
                       />
                       <span className="text-sm text-gray-700">{range}</span>
@@ -190,7 +276,8 @@ export default function SearchPage() {
                         type="radio"
                         name="rating"
                         value={rating}
-                        defaultChecked={rating === 4.0}
+                        checked={selectedRating === rating}
+                        onChange={(e) => setSelectedRating(parseFloat(e.target.value))}
                         className="text-green-500 focus:ring-green-500"
                       />
                       <span className="text-sm text-gray-700">{rating}+ stars</span>
@@ -200,7 +287,10 @@ export default function SearchPage() {
               </div>
 
               {/* Clear Filters */}
-              <button className="w-full text-green-600 hover:text-green-700 font-medium text-sm">
+              <button 
+                onClick={clearFilters}
+                className="w-full text-green-600 hover:text-green-700 font-medium text-sm"
+              >
                 Clear All Filters
               </button>
             </div>
@@ -214,71 +304,97 @@ export default function SearchPage() {
                 <div className="flex items-center space-x-4 text-sm">
                   <span className="text-gray-600">{searchResults.length} results</span>
                   <span className="text-gray-400">•</span>
-                  <span className="text-gray-600">Sorted by relevance</span>
+                  <span className="text-gray-600">Sorted by {sortBy}</span>
                 </div>
                 
                 <div className="flex items-center space-x-2">
-                  <button className="p-2 text-gray-600 hover:text-gray-900 transition-colors">
+                  <button 
+                    onClick={() => setViewMode('grid')}
+                    className={`p-2 transition-colors ${viewMode === 'grid' ? 'text-green-600' : 'text-gray-600 hover:text-gray-900'}`}
+                  >
                     <Grid3X3 className="w-4 h-4" />
                   </button>
-                  <button className="p-2 text-gray-600 hover:text-gray-900 transition-colors">
+                  <button 
+                    onClick={() => setViewMode('list')}
+                    className={`p-2 transition-colors ${viewMode === 'list' ? 'text-green-600' : 'text-gray-600 hover:text-gray-900'}`}
+                  >
                     <List className="w-4 h-4" />
                   </button>
-                  <button className="p-2 text-gray-600 hover:text-gray-900 transition-colors">
+                  <button 
+                    onClick={() => setShowFilters(!showFilters)}
+                    className="p-2 text-gray-600 hover:text-gray-900 transition-colors"
+                  >
                     <SlidersHorizontal className="w-4 h-4" />
                   </button>
                 </div>
               </div>
             </div>
 
-            {/* Results Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
-              {searchResults.map((app) => (
-                <div key={app.id} className="bg-white rounded-xl border border-gray-200 hover:border-green-300 hover:shadow-lg transition-all p-4">
-                  <div className="flex items-start space-x-3">
-                    <div className="w-16 h-16 bg-gradient-to-br from-green-100 to-blue-100 rounded-xl flex items-center justify-center flex-shrink-0">
-                      <Smartphone className="w-8 h-8 text-green-600" />
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-start justify-between">
-                        <div className="flex-1 min-w-0">
-                          <h3 className="font-medium text-gray-900 text-base mb-1 truncate">{app.name}</h3>
-                          <p className="text-gray-500 text-xs mb-2">{app.developer}</p>
-                          <p className="text-gray-600 text-sm mb-3 line-clamp-2">{app.description}</p>
-                        </div>
-                        <button className="p-1 text-gray-400 hover:text-gray-600 transition-colors">
-                          <MoreVertical className="w-4 h-4" />
+            {/* Results Display */}
+            {isLoading ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+                {Array.from({ length: 6 }).map((_, index) => (
+                  <AppCardSkeleton key={index} variant="detailed" />
+                ))}
+              </div>
+            ) : error ? (
+              <div className="text-center py-12">
+                <div className="text-red-500 mb-4">
+                  <Search className="w-12 h-12 mx-auto" />
+                </div>
+                <h3 className="text-lg font-medium text-gray-900 mb-2">Search Error</h3>
+                <p className="text-gray-600 mb-4">{error}</p>
+                <button 
+                  onClick={() => searchTerm && performSearch(searchTerm)}
+                  className="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition-colors"
+                >
+                  Try Again
+                </button>
+              </div>
+            ) : searchResults.length === 0 ? (
+              <div className="text-center py-12">
+                <div className="text-gray-400 mb-4">
+                  <Search className="w-12 h-12 mx-auto" />
+                </div>
+                <h3 className="text-lg font-medium text-gray-900 mb-2">No Results Found</h3>
+                <p className="text-gray-600 mb-4">
+                  {searchTerm ? `No apps found for "${searchTerm}"` : 'Enter a search term to find apps'}
+                </p>
+                {recentSearches.length > 0 && (
+                  <div className="mt-6">
+                    <p className="text-sm text-gray-500 mb-3">Recent searches:</p>
+                    <div className="flex flex-wrap justify-center gap-2">
+                      {recentSearches.slice(0, 5).map((search, index) => (
+                        <button
+                          key={index}
+                          onClick={() => {
+                            setSearchTerm(search);
+                            performSearch(search);
+                          }}
+                          className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm hover:bg-gray-200 transition-colors"
+                        >
+                          {search}
                         </button>
-                      </div>
-                      <div className="flex items-center space-x-3 text-xs text-gray-500 mb-3">
-                        <div className="flex items-center space-x-1">
-                          <Star className="w-3 h-3 text-yellow-400 fill-current" />
-                          <span className="text-gray-700">{app.rating}</span>
-                        </div>
-                        <span>•</span>
-                        <span>{app.downloads}</span>
-                        <span>•</span>
-                        <span>{app.size}</span>
-                      </div>
-                      <div className="flex items-center justify-between">
-                        <span className="text-lg font-semibold text-gray-900">{app.price}</span>
-                        <div className="flex items-center space-x-2">
-                          <button className="p-2 text-gray-400 hover:text-gray-600 transition-colors">
-                            <Bookmark className="w-4 h-4" />
-                          </button>
-                          <button className="p-2 text-gray-400 hover:text-gray-600 transition-colors">
-                            <Share2 className="w-4 h-4" />
-                          </button>
-                          <button className="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition-colors text-sm font-medium">
-                            Install
-                          </button>
-                        </div>
-                      </div>
+                      ))}
                     </div>
                   </div>
-                </div>
-              ))}
-            </div>
+                )}
+              </div>
+            ) : (
+              <div className={`grid gap-4 ${
+                viewMode === 'grid' 
+                  ? 'grid-cols-1 md:grid-cols-2 xl:grid-cols-3' 
+                  : 'grid-cols-1'
+              }`}>
+                {searchResults.map((app) => (
+                  <AppCard 
+                    key={app.appId} 
+                    app={app} 
+                    variant={viewMode === 'grid' ? 'detailed' : 'compact'}
+                  />
+                ))}
+              </div>
+            )}
 
             {/* Pagination */}
             <div className="mt-8 flex items-center justify-center">

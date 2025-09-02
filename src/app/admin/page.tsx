@@ -14,6 +14,7 @@ import {
   BarChart3,
   Shield
 } from 'lucide-react';
+import Breadcrumb, { BreadcrumbItem } from '../components/Breadcrumb';
 
 export default function AdminDashboard() {
   // Mock data - in real app this would come from API
@@ -54,6 +55,14 @@ export default function AdminDashboard() {
 
   return (
     <div className="space-y-8">
+      {/* Breadcrumb Navigation */}
+      <Breadcrumb 
+        items={[
+          { label: 'Admin', href: '/admin' },
+          { label: 'Dashboard', current: true }
+        ]} 
+      />
+
       {/* Page Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>

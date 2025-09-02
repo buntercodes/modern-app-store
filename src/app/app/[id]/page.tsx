@@ -2,6 +2,7 @@
 
 import { Star, Download, Share2, Heart, Check, Clock, Users, Globe, Smartphone, Shield, Zap, MoreVertical, Bookmark, Calendar, Eye, Shield as PrivacyIcon, Info, ExternalLink } from "lucide-react";
 import Header from "../../components/Header";
+import Breadcrumb, { BreadcrumbItem } from "../../components/Breadcrumb";
 import { useEffect, useState, use } from "react";
 import { GooglePlayApp } from "../../services/googlePlayApi";
 
@@ -104,6 +105,14 @@ export default function AppDetailPage({ params }: { params: Promise<{ id: string
       <Header showSearch={false} />
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        {/* Breadcrumb Navigation */}
+        <Breadcrumb 
+          items={[
+            { label: 'Categories', href: '/android-app-categories' },
+            { label: app?.title || 'App Details', current: true }
+          ]} 
+        />
+
         {/* App Header */}
         <div className="bg-white rounded-xl border border-gray-200 p-6 mb-6">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">

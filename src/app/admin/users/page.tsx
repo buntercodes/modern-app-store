@@ -1,10 +1,19 @@
 "use client";
 
 import { Users, Plus, Search, Filter } from 'lucide-react';
+import Breadcrumb, { BreadcrumbItem } from '../../components/Breadcrumb';
 
 export default function UserManagementPage() {
   return (
     <div className="space-y-6">
+      {/* Breadcrumb Navigation */}
+      <Breadcrumb 
+        items={[
+          { label: 'Admin', href: '/admin' },
+          { label: 'User Management', current: true }
+        ]} 
+      />
+
       <div className="sm:flex sm:items-center sm:justify-between">
         <div>
           <h1 className="text-2xl font-bold text-gray-900">User Management</h1>

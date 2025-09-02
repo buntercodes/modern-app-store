@@ -17,6 +17,7 @@ import { useRouter } from 'next/navigation';
 import { appwriteService } from '../../../lib/appwrite';
 import { useAuth } from '../../../context/AuthContext';
 import AppwriteDiagnostic from '../../../components/AppwriteDiagnostic';
+import Breadcrumb, { BreadcrumbItem } from '../../../components/Breadcrumb';
 
 interface AppLookupData {
   appId: string;
@@ -201,6 +202,15 @@ export default function AddAppPage() {
 
   return (
     <div className="space-y-8">
+      {/* Breadcrumb Navigation */}
+      <Breadcrumb 
+        items={[
+          { label: 'Admin', href: '/admin' },
+          { label: 'App Management', href: '/admin/apps' },
+          { label: 'Add New App', current: true }
+        ]} 
+      />
+
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>

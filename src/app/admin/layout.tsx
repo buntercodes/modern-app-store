@@ -18,6 +18,7 @@ import {
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { useRouter } from 'next/navigation';
+import Breadcrumb, { BreadcrumbItem } from '../components/Breadcrumb';
 
 interface AdminLayoutProps {
   children: React.ReactNode;

@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useAuth } from '../context/AuthContext';
 import { useFormInteraction } from '../hooks/useFormInteraction';
 import { Eye, EyeOff, Mail, Lock, AlertCircle, ArrowRight, UserPlus, Shield } from 'lucide-react';
+import Breadcrumb, { BreadcrumbItem } from '../components/Breadcrumb';
 
 export default function LoginPage() {
   const router = useRouter();
@@ -68,6 +69,13 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
+        {/* Breadcrumb Navigation */}
+        <Breadcrumb 
+          items={[
+            { label: 'Login', current: true }
+          ]} 
+        />
+
         {/* Header */}
         <div className="text-center">
           <div className="mx-auto h-12 w-12 bg-green-500 rounded-xl flex items-center justify-center">
