@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { googlePlayScraper } from '../../../../lib/googlePlayScraper';
+import { googlePlayScraper } from '../../../lib/googlePlayScraper';
 
 export async function GET(
   request: NextRequest,
