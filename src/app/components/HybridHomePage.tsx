@@ -79,7 +79,7 @@ export default function HybridHomePage({ initialData }: HybridHomePageProps) {
       'com.netflix.mediaclient': 'Netflix – stream movies and TV shows APK download'
     };
     
-    return snippets[app.appId as keyof typeof snippets] || `${app.title} – ${app.summary.substring(0, 50)}... APK download`;
+    return snippets[app.appId as keyof typeof snippets] || `${app.title} – ${typeof app.summary === 'string' ? app.summary.substring(0, 50) : 'App description'}... APK download`;
   };
 
   return (
@@ -166,7 +166,7 @@ export default function HybridHomePage({ initialData }: HybridHomePageProps) {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {appsData.trendingApps.length > 0 ? (
               appsData.trendingApps.slice(0, 6).map((app) => (
-                <div key={app.appId} className="bg-white rounded-xl border border-gray-200 hover:border-green-300 hover:shadow-lg transition-all duration-300 p-6 group">
+                <div key={typeof app.appId === 'string' ? app.appId : `app-${Math.random()}`} className="bg-white rounded-xl border border-gray-200 hover:border-green-300 hover:shadow-lg transition-all duration-300 p-6 group">
                   <div className="flex items-start space-x-4">
                     <div className="flex-shrink-0">
                       {app.icon ? (
@@ -236,7 +236,7 @@ export default function HybridHomePage({ initialData }: HybridHomePageProps) {
           <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
             {appsData.recommendedApps.length > 0 ? (
               appsData.recommendedApps.slice(0, 6).map((app) => (
-                <AppCard key={app.appId} app={app} variant="compact" />
+                <AppCard key={typeof app.appId === 'string' ? app.appId : `app-${Math.random()}`} app={app} variant="compact" />
               ))
             ) : (
               <div className="col-span-full text-center py-8">
@@ -265,7 +265,7 @@ export default function HybridHomePage({ initialData }: HybridHomePageProps) {
           <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
             {appsData.toolsApps.length > 0 ? (
               appsData.toolsApps.slice(0, 6).map((app) => (
-                <AppCard key={app.appId} app={app} variant="compact" />
+                <AppCard key={typeof app.appId === 'string' ? app.appId : `app-${Math.random()}`} app={app} variant="compact" />
               ))
             ) : (
               <div className="col-span-full text-center py-8">

@@ -1,6 +1,6 @@
 "use client";
 
-import { Client, Databases, Account, ID } from 'appwrite';
+import { Client, Databases, Account, ID, Query } from 'appwrite';
 
 // Appwrite configuration - Updated for Two Tables architecture
 const APPWRITE_ENDPOINT = process.env.NEXT_PUBLIC_APPWRITE_ENDPOINT || 'https://cloud.appwrite.io/v1';
@@ -163,7 +163,7 @@ export class AppwriteService {
   }
 
   // Get apps from table 1
-  async getApps(_limit: number = 100, _offset: number = 0): Promise<AppRow[]> {
+  async getApps(limit: number = 100, offset: number = 0): Promise<AppRow[]> {
     this.checkConfig();
     
     try {
@@ -171,7 +171,8 @@ export class AppwriteService {
         appwriteConfig.databaseId,
         appwriteConfig.tableId1,
         [
-          // Add any queries you need
+          Query.limit(limit),
+          Query.offset(offset)
         ]
       );
       return response.documents as unknown as AppRow[];

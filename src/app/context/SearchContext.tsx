@@ -76,6 +76,16 @@ export function SearchProvider({ children }: { children: React.ReactNode }) {
     localStorage.setItem('recentSearches', JSON.stringify(recentSearches));
   }, [recentSearches]);
 
+  const addToRecentSearches = useCallback((term: string) => {
+    const trimmedTerm = term.trim();
+    if (!trimmedTerm) return;
+
+    setRecentSearches(prev => {
+      const filtered = prev.filter(search => search.toLowerCase() !== trimmedTerm.toLowerCase());
+      return [trimmedTerm, ...filtered].slice(0, 10); // Keep only 10 recent searches
+    });
+  }, []);
+
   const performSearch = useCallback(async (term: string, options: SearchOptions = {}) => {
     if (!term.trim()) {
       setSearchResults([]);
@@ -119,22 +129,12 @@ export function SearchProvider({ children }: { children: React.ReactNode }) {
     } finally {
       setIsLoading(false);
     }
-  }, []);
+  }, [addToRecentSearches]);
 
   const clearSearch = useCallback(() => {
     setSearchTerm('');
     setSearchResults([]);
     setError(null);
-  }, []);
-
-  const addToRecentSearches = useCallback((term: string) => {
-    const trimmedTerm = term.trim();
-    if (!trimmedTerm) return;
-
-    setRecentSearches(prev => {
-      const filtered = prev.filter(search => search.toLowerCase() !== trimmedTerm.toLowerCase());
-      return [trimmedTerm, ...filtered].slice(0, 10); // Keep only 10 recent searches
-    });
   }, []);
 
   const clearRecentSearches = useCallback(() => {
