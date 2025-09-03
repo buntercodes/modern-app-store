@@ -10,8 +10,12 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
             <div className="flex items-center space-x-3 mb-4">
-              <div className="w-8 h-8 bg-green-500 rounded-lg flex items-center justify-center">
-                <Smartphone className="w-5 h-5 text-white" />
+              <div className="w-10 h-10 rounded-lg overflow-hidden">
+                <img 
+                  src="/logo_test.png" 
+                  alt="Modern App Store Logo" 
+                  className="w-full h-full object-cover"
+                />
               </div>
               <span className="text-xl font-medium text-gray-900">Modern App Store</span>
             </div>

@@ -78,7 +78,7 @@ export default function AppCard({ app, variant = 'compact', className = '' }: Ap
             
             <div className="flex items-center justify-between">
               <span className="text-lg font-semibold text-gray-900">
-                {app.free ? 'Free' : `$${app.price}`}
+                {app.free || app.price === 0 ? 'Free' : `$${app.price}`}
               </span>
               <div className="flex items-center space-x-2">
                 <button className="p-2 text-gray-400 hover:text-gray-600 transition-colors">
@@ -129,7 +129,7 @@ export default function AppCard({ app, variant = 'compact', className = '' }: Ap
       </div>
       
       <div className="text-xs text-gray-500">
-        {app.free ? 'Free' : `$${app.price}`}
+        {app.free || app.price === 0 ? 'Free' : `$${app.price}`}
       </div>
     </div>
   );
