@@ -5,6 +5,7 @@ import { Star, Smartphone, Search, Filter, ArrowRight, Gamepad2, MessageSquare, 
 import Header from "./Header";
 import AppCard from "./AppCard";
 import Link from "next/link";
+import { GooglePlayApp } from "../lib/googlePlayScraper";
 
 
 interface HybridHomePageProps {
@@ -79,7 +80,7 @@ export default function HybridHomePage({ initialData }: HybridHomePageProps) {
       'com.netflix.mediaclient': 'Netflix – stream movies and TV shows APK download'
     };
     
-    return snippets[app.appId as keyof typeof snippets] || `${app.title} – ${typeof app.summary === 'string' ? app.summary.substring(0, 50) : 'App description'}... APK download`;
+    return snippets[app.appId as keyof typeof snippets] || `${typeof app.title === 'string' ? app.title : 'App'} – ${typeof app.summary === 'string' ? app.summary.substring(0, 50) : 'App description'}... APK download`;
   };
 
   return (
@@ -169,15 +170,15 @@ export default function HybridHomePage({ initialData }: HybridHomePageProps) {
                 <div key={typeof app.appId === 'string' ? app.appId : `app-${Math.random()}`} className="bg-white rounded-xl border border-gray-200 hover:border-green-300 hover:shadow-lg transition-all duration-300 p-6 group">
                   <div className="flex items-start space-x-4">
                     <div className="flex-shrink-0">
-                      {app.icon ? (
+                      {app.icon && typeof app.icon === 'string' ? (
                         <img 
                           src={app.icon} 
-                          alt={app.title}
+                          alt={app.title as string}
                           className="w-16 h-16 rounded-xl object-cover"
                         />
                       ) : (
                         <div className="bg-gradient-to-br from-green-100 to-blue-100 w-16 h-16 rounded-xl flex items-center justify-center text-white text-2xl font-bold">
-                          {app.title.charAt(0).toUpperCase()}
+                          {typeof app.title === 'string' ? app.title.charAt(0).toUpperCase() : 'A'}
                         </div>
                       )}
                     </div>
@@ -185,7 +186,7 @@ export default function HybridHomePage({ initialData }: HybridHomePageProps) {
                     <div className="flex-1 min-w-0">
                       <Link href={`/app/${app.appId}`}>
                         <h3 className="font-bold text-gray-900 text-lg mb-2 group-hover:text-green-600 transition-colors line-clamp-1">
-                          {app.title}
+                          {typeof app.title === 'string' ? app.title : 'App'}
                         </h3>
                       </Link>
                       <p className="text-gray-600 text-sm mb-3 line-clamp-2">
@@ -195,10 +196,10 @@ export default function HybridHomePage({ initialData }: HybridHomePageProps) {
                       <div className="flex items-center space-x-3 text-xs text-gray-500 mb-3">
                         <div className="flex items-center space-x-1">
                           <Star className="w-3 h-3 text-yellow-400 fill-current" />
-                          <span className="text-gray-700">{app.score}</span>
+                          <span className="text-gray-700">{typeof app.score === 'number' ? app.score.toFixed(1) : 'N/A'}</span>
                         </div>
                         <span>•</span>
-                        <span>{app.free ? 'Free' : `$${app.price}`}</span>
+                        <span>{app.free ? 'Free' : `$${typeof app.price === 'number' ? app.price : '0'}`}</span>
                       </div>
                       
                       <Link 
@@ -236,7 +237,7 @@ export default function HybridHomePage({ initialData }: HybridHomePageProps) {
           <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
             {appsData.recommendedApps.length > 0 ? (
               appsData.recommendedApps.slice(0, 6).map((app) => (
-                <AppCard key={typeof app.appId === 'string' ? app.appId : `app-${Math.random()}`} app={app} variant="compact" />
+                <AppCard key={typeof app.appId === 'string' ? app.appId : `app-${Math.random()}`} app={app as unknown as GooglePlayApp} variant="compact" />
               ))
             ) : (
               <div className="col-span-full text-center py-8">
@@ -265,7 +266,7 @@ export default function HybridHomePage({ initialData }: HybridHomePageProps) {
           <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
             {appsData.toolsApps.length > 0 ? (
               appsData.toolsApps.slice(0, 6).map((app) => (
-                <AppCard key={typeof app.appId === 'string' ? app.appId : `app-${Math.random()}`} app={app} variant="compact" />
+                <AppCard key={typeof app.appId === 'string' ? app.appId : `app-${Math.random()}`} app={app as unknown as GooglePlayApp} variant="compact" />
               ))
             ) : (
               <div className="col-span-full text-center py-8">

@@ -1,3 +1,4 @@
+// @ts-expect-error - google-play-scraper doesn't have proper TypeScript exports
 import gplay from 'google-play-scraper';
 
 // Interface for our standardized app data structure
@@ -146,7 +147,7 @@ class GooglePlayScraperService {
       console.log(`✅ Scraped ${apps.length} apps from Google Play`);
       
       // Transform the data to our standardized format
-      const transformedApps = apps.map(app => this.transformAppData(app));
+      const transformedApps = apps.map((app: unknown) => this.transformAppData(app as Record<string, unknown>));
       
       return transformedApps;
     } catch (error) {
@@ -184,7 +185,7 @@ class GooglePlayScraperService {
       console.log(`✅ Found ${apps.length} apps for search: "${term}"`);
       
       // Transform the data to our standardized format
-      const transformedApps = apps.map(app => this.transformAppData(app));
+      const transformedApps = apps.map((app: unknown) => this.transformAppData(app as Record<string, unknown>));
       
       return transformedApps;
     } catch (error) {
@@ -224,7 +225,7 @@ class GooglePlayScraperService {
       console.log(`✅ Retrieved ${apps.length} trending apps`);
       
       // Transform the data to our standardized format
-      const transformedApps = apps.map(app => this.transformAppData(app));
+      const transformedApps = apps.map((app: unknown) => this.transformAppData(app as Record<string, unknown>));
       
       return transformedApps;
     } catch (error) {
@@ -247,7 +248,7 @@ class GooglePlayScraperService {
       console.log(`✅ Retrieved ${apps.length} recommended apps`);
       
       // Transform the data to our standardized format
-      const transformedApps = apps.map(app => this.transformAppData(app));
+      const transformedApps = apps.map((app: unknown) => this.transformAppData(app as Record<string, unknown>));
       
       return transformedApps;
     } catch (error) {
@@ -270,7 +271,7 @@ class GooglePlayScraperService {
       console.log(`✅ Retrieved ${apps.length} tools apps`);
       
       // Transform the data to our standardized format
-      const transformedApps = apps.map(app => this.transformAppData(app));
+      const transformedApps = apps.map((app: unknown) => this.transformAppData(app as Record<string, unknown>));
       
       return transformedApps;
     } catch (error) {
@@ -288,7 +289,7 @@ class GooglePlayScraperService {
       
       console.log(`✅ Retrieved ${categories.length} categories`);
       
-      return categories;
+      return categories as string[];
     } catch (error) {
       console.error('❌ Error getting categories:', error);
       throw new Error(`Failed to get categories: ${error instanceof Error ? error.message : 'Unknown error'}`);
@@ -305,7 +306,7 @@ class GooglePlayScraperService {
       console.log(`✅ Retrieved ${apps.length} apps for developer: ${devId}`);
       
       // Transform the data to our standardized format
-      const transformedApps = apps.map(app => this.transformAppData(app));
+      const transformedApps = apps.map((app: unknown) => this.transformAppData(app as Record<string, unknown>));
       
       return transformedApps;
     } catch (error) {

@@ -177,47 +177,48 @@ export class AppwriteAuthService {
   // Helper method to extract error messages
   private getErrorMessage(error: unknown): string {
     // Handle AppwriteException specifically
-    if (error?.type === 'general_unauthorized_scope' || error?.code === 401) {
+    const errorObj = error as { type?: string; code?: number; name?: string; message?: string };
+    if (errorObj?.type === 'general_unauthorized_scope' || errorObj?.code === 401) {
       return 'Invalid credentials. Please check your email and password.';
     }
     
-    if (error?.type === 'user_invalid_credentials') {
+    if (errorObj?.type === 'user_invalid_credentials') {
       return 'Invalid email or password. Please try again.';
     }
     
-    if (error?.type === 'user_email_already_exists') {
+    if (errorObj?.type === 'user_email_already_exists') {
       return 'An account with this email already exists.';
     }
     
-    if (error?.type === 'user_password_mismatch') {
+    if (errorObj?.type === 'user_password_mismatch') {
       return 'Password does not match. Please try again.';
     }
     
-    if (error?.type === 'user_email_not_found') {
+    if (errorObj?.type === 'user_email_not_found') {
       return 'No account found with this email address.';
     }
     
-    if (error?.type === 'user_blocked') {
+    if (errorObj?.type === 'user_blocked') {
       return 'Your account has been blocked. Please contact support.';
     }
     
-    if (error?.type === 'user_invalid_token') {
+    if (errorObj?.type === 'user_invalid_token') {
       return 'Your session has expired. Please log in again.';
     }
     
-    if (error?.type === 'general_rate_limit_exceeded') {
+    if (errorObj?.type === 'general_rate_limit_exceeded') {
       return 'Too many attempts. Please try again later.';
     }
     
     // Handle network errors
-    if (error?.name === 'NetworkError' || error?.message?.includes('network')) {
+    if (errorObj?.name === 'NetworkError' || errorObj?.message?.includes('network')) {
       return 'Network error. Please check your connection and try again.';
     }
     
     // Handle generic AppwriteException
-    if (error?.message && typeof error.message === 'string') {
+    if (errorObj?.message && typeof errorObj.message === 'string') {
       // Clean up Appwrite error messages
-      const message = error.message.toLowerCase();
+      const message = errorObj.message.toLowerCase();
       if (message.includes('invalid credentials') || message.includes('unauthorized')) {
         return 'Invalid credentials. Please check your email and password.';
       }
@@ -227,7 +228,7 @@ export class AppwriteAuthService {
       if (message.includes('password')) {
         return 'Password error. Please check your password and try again.';
       }
-      return error.message;
+      return errorObj.message;
     }
     
     if (typeof error === 'string') {

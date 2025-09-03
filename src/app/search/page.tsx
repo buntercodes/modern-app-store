@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { Loader2, Search } from "lucide-react";
 import Header from "../components/Header";
@@ -9,7 +9,7 @@ import { useSearch } from "../context/SearchContext";
 import AppCard from "../components/AppCard";
 import AppCardSkeleton from "../components/AppCardSkeleton";
 
-export default function SearchPage() {
+function SearchContent() {
   const searchParams = useSearchParams();
   const { searchResults, isLoading, error, performSearch, recentSearches } = useSearch();
   
@@ -126,5 +126,36 @@ export default function SearchPage() {
         </div>
       </main>
     </div>
+  );
+}
+
+export default function SearchPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-white">
+        <Header />
+        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+          <Breadcrumb 
+            items={[
+              { label: 'Search Results', current: true }
+            ]} 
+          />
+          <div className="mb-6">
+            <h1 className="text-2xl font-bold text-gray-900 mb-2">Search Results</h1>
+            <p className="text-gray-600 text-sm flex items-center">
+              <Loader2 className="w-4 h-4 animate-spin mr-2" />
+              Loading...
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+            {Array.from({ length: 6 }).map((_, index) => (
+              <AppCardSkeleton key={index} variant="detailed" />
+            ))}
+          </div>
+        </main>
+      </div>
+    }>
+      <SearchContent />
+    </Suspense>
   );
 }

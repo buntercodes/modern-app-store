@@ -76,7 +76,7 @@ class GooglePlayApiService {
 
   // Search for apps
   async searchApps(params: SearchParams): Promise<GooglePlayApp[]> {
-    const response = await this.makeRequest<{ results: GooglePlayApp[] }>('/api/search', params);
+    const response = await this.makeRequest<{ results: GooglePlayApp[] }>('/api/search', params as unknown as Record<string, unknown>);
     return response.results || [];
   }
 
