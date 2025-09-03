@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useEffect } from 'react';
-import { Star, Download, TrendingUp, Smartphone, Search, Filter, ArrowRight, ExternalLink, Gamepad2, MessageSquare, Music, Camera, Shield, Zap } from "lucide-react";
+import { useState } from 'react';
+import { Star, Smartphone, Search, Filter, ArrowRight, Gamepad2, MessageSquare, Music, Camera, Shield, Zap } from "lucide-react";
 import Header from "./Header";
 import AppCard from "./AppCard";
 import Link from "next/link";

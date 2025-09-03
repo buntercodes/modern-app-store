@@ -168,11 +168,11 @@ class GooglePlayScraperService {
       };
       
       if (category) {
-        searchOptions.category = category as any;
+        searchOptions.category = category as never;
       }
       
       if (price) {
-        searchOptions.price = price as any;
+        searchOptions.price = price as never;
       }
       
       if (rating) {

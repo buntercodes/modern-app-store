@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { Gamepad2, Palette, Shield, Camera, Music, Heart, BookOpen, Globe, Zap, Users, ShoppingCart, Car, Home, Plane, GraduationCap, Briefcase, Leaf, Play, Smartphone, Watch, Scissors, Book, Building, MessageSquare, Calendar, DollarSign, Utensils, Dumbbell, House, Library, MapPin, Stethoscope, Newspaper, Baby, ShoppingBag, Trophy, Navigation, Video, Clock, Cloud, Dice1, Circle, Coffee, Sword, Crown, HelpCircle, Type } from "lucide-react";
+import { Gamepad2, Palette, Music, Heart, BookOpen, Zap, GraduationCap, Leaf, Play, Smartphone, Watch, Scissors, Book, Building, MessageSquare, Calendar, DollarSign, Utensils, Dumbbell, House, Library, MapPin, Stethoscope, Newspaper, Baby, ShoppingBag, Trophy, Navigation, Video, Clock, Cloud, Dice1, Circle, Coffee, Sword, Crown, HelpCircle, Type, Car, Settings, Camera, Briefcase, Users } from "lucide-react";
 import Header from "../components/Header";
 import Breadcrumb from "../components/Breadcrumb";
 
@@ -154,7 +154,7 @@ export default function AndroidAppCategoriesPage() {
     { name: "APPLICATION", icon: <Smartphone className="w-8 h-8" />, color: "bg-blue-500", count: 1250, description: "General applications" },
     { name: "ANDROID_WEAR", icon: <Watch className="w-8 h-8" />, color: "bg-purple-500", count: 89, description: "Android Wear apps" },
     { name: "ART_AND_DESIGN", icon: <Palette className="w-8 h-8" />, color: "bg-pink-500", count: 456, description: "Creative design tools" },
-    { name: "AUTO_AND_VEHICLES", icon: <CarIcon className="w-8 h-8" />, color: "bg-orange-500", count: 234, description: "Car and vehicle apps" },
+    { name: "AUTO_AND_VEHICLES", icon: <Car className="w-8 h-8" />, color: "bg-orange-500", count: 234, description: "Car and vehicle apps" },
     { name: "BEAUTY", icon: <Scissors className="w-8 h-8" />, color: "bg-rose-500", count: 345, description: "Beauty and cosmetics" },
     { name: "BOOKS_AND_REFERENCE", icon: <Book className="w-8 h-8" />, color: "bg-amber-500", count: 678, description: "Books and reference materials" },
     { name: "BUSINESS", icon: <Building className="w-8 h-8" />, color: "bg-green-500", count: 789, description: "Business applications" },
@@ -175,18 +175,18 @@ export default function AndroidAppCategoriesPage() {
     { name: "MUSIC_AND_AUDIO", icon: <Music className="w-8 h-8" />, color: "bg-purple-700", count: 567, description: "Music and audio" },
     { name: "NEWS_AND_MAGAZINES", icon: <Newspaper className="w-8 h-8" />, color: "bg-gray-600", count: 234, description: "News and magazines" },
     { name: "PARENTING", icon: <Baby className="w-8 h-8" />, color: "bg-pink-600", count: 123, description: "Parenting tools" },
-    { name: "PERSONALIZATION", icon: <PersonalizationIcon className="w-8 h-8" />, color: "bg-indigo-600", count: 345, description: "Personalization tools" },
-    { name: "PHOTOGRAPHY", icon: <PhotoIcon className="w-8 h-8" />, color: "bg-cyan-600", count: 456, description: "Photography apps" },
-    { name: "PRODUCTIVITY", icon: <ProductivityIcon className="w-8 h-8" />, color: "bg-green-700", count: 890, description: "Productivity tools" },
+    { name: "PERSONALIZATION", icon: <Settings className="w-8 h-8" />, color: "bg-indigo-600", count: 345, description: "Personalization tools" },
+    { name: "PHOTOGRAPHY", icon: <Camera className="w-8 h-8" />, color: "bg-cyan-600", count: 456, description: "Photography apps" },
+    { name: "PRODUCTIVITY", icon: <Briefcase className="w-8 h-8" />, color: "bg-green-700", count: 890, description: "Productivity tools" },
     { name: "SHOPPING", icon: <ShoppingBag className="w-8 h-8" />, color: "bg-lime-500", count: 567, description: "Shopping applications" },
-    { name: "SOCIAL", icon: <SocialIcon className="w-8 h-8" />, color: "bg-blue-800", count: 678, description: "Social networking" },
+    { name: "SOCIAL", icon: <Users className="w-8 h-8" />, color: "bg-blue-800", count: 678, description: "Social networking" },
     { name: "SPORTS", icon: <Trophy className="w-8 h-8" />, color: "bg-orange-700", count: 345, description: "Sports applications" },
     { name: "TOOLS", icon: <Zap className="w-8 h-8" />, color: "bg-yellow-600", count: 789, description: "System tools" },
     { name: "TRAVEL_AND_LOCAL", icon: <Navigation className="w-8 h-8" />, color: "bg-sky-500", count: 456, description: "Travel and local" },
     { name: "VIDEO_PLAYERS", icon: <Video className="w-8 h-8" />, color: "bg-red-700", count: 234, description: "Video players" },
     { name: "WATCH_FACE", icon: <Clock className="w-8 h-8" />, color: "bg-purple-800", count: 123, description: "Watch faces" },
     { name: "WEATHER", icon: <Cloud className="w-8 h-8" />, color: "bg-blue-900", count: 156, description: "Weather applications" },
-    { name: "GAME", icon: <GameIcon className="w-8 h-8" />, color: "bg-green-800", count: 2000, description: "General games" },
+    { name: "GAME", icon: <Gamepad2 className="w-8 h-8" />, color: "bg-green-800", count: 2000, description: "General games" },
     { name: "GAME_ACTION", icon: <Sword className="w-8 h-8" />, color: "bg-red-800", count: 456, description: "Action games" },
     { name: "GAME_ADVENTURE", icon: <MapPin className="w-8 h-8" />, color: "bg-indigo-700", count: 345, description: "Adventure games" },
     { name: "GAME_ARCADE", icon: <Gamepad2 className="w-8 h-8" />, color: "bg-yellow-700", count: 567, description: "Arcade games" },
@@ -194,17 +194,17 @@ export default function AndroidAppCategoriesPage() {
     { name: "GAME_CARD", icon: <Dice1 className="w-8 h-8" />, color: "bg-purple-900", count: 345, description: "Card games" },
     { name: "GAME_CASINO", icon: <Circle className="w-8 h-8" />, color: "bg-red-900", count: 123, description: "Casino games" },
     { name: "GAME_CASUAL", icon: <Coffee className="w-8 h-8" />, color: "bg-orange-800", count: 678, description: "Casual games" },
-    { name: "GAME_EDUCATIONAL", icon: <EducationIcon className="w-8 h-8" />, color: "bg-blue-800", count: 456, description: "Educational games" },
-    { name: "GAME_MUSIC", icon: <MusicIcon className="w-8 h-8" />, color: "bg-purple-800", count: 234, description: "Music games" },
-    { name: "GAME_PUZZLE", icon: <PuzzleIcon className="w-8 h-8" />, color: "bg-indigo-800", count: 567, description: "Puzzle games" },
-    { name: "GAME_RACING", icon: <RacingIcon className="w-8 h-8" />, color: "bg-red-800", count: 345, description: "Racing games" },
+    { name: "GAME_EDUCATIONAL", icon: <GraduationCap className="w-8 h-8" />, color: "bg-blue-800", count: 456, description: "Educational games" },
+    { name: "GAME_MUSIC", icon: <Music className="w-8 h-8" />, color: "bg-purple-800", count: 234, description: "Music games" },
+    { name: "GAME_PUZZLE", icon: <HelpCircle className="w-8 h-8" />, color: "bg-indigo-800", count: 567, description: "Puzzle games" },
+    { name: "GAME_RACING", icon: <Car className="w-8 h-8" />, color: "bg-red-800", count: 345, description: "Racing games" },
     { name: "GAME_ROLE_PLAYING", icon: <Sword className="w-8 h-8" />, color: "bg-green-800", count: 456, description: "RPG games" },
-    { name: "GAME_SIMULATION", icon: <SimulationIcon className="w-8 h-8" />, color: "bg-gray-700", count: 234, description: "Simulation games" },
-    { name: "GAME_SPORTS", icon: <SportsIcon className="w-8 h-8" />, color: "bg-orange-800", count: 345, description: "Sports games" },
+    { name: "GAME_SIMULATION", icon: <Settings className="w-8 h-8" />, color: "bg-gray-700", count: 234, description: "Simulation games" },
+    { name: "GAME_SPORTS", icon: <Trophy className="w-8 h-8" />, color: "bg-orange-800", count: 345, description: "Sports games" },
     { name: "GAME_STRATEGY", icon: <Crown className="w-8 h-8" />, color: "bg-amber-700", count: 234, description: "Strategy games" },
     { name: "GAME_TRIVIA", icon: <HelpCircle className="w-8 h-8" />, color: "bg-blue-800", count: 123, description: "Trivia games" },
     { name: "GAME_WORD", icon: <Type className="w-8 h-8" />, color: "bg-green-700", count: 156, description: "Word games" },
-    { name: "FAMILY", icon: <FamilyIcon className="w-8 h-8" />, color: "bg-pink-700", count: 456, description: "Family-friendly apps" }
+    { name: "FAMILY", icon: <Users className="w-8 h-8" />, color: "bg-pink-700", count: 456, description: "Family-friendly apps" }
   ];
 
   return (

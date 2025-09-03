@@ -163,7 +163,7 @@ export class AppwriteService {
   }
 
   // Get apps from table 1
-  async getApps(limit: number = 100, offset: number = 0): Promise<AppRow[]> {
+  async getApps(_limit: number = 100, _offset: number = 0): Promise<AppRow[]> {
     this.checkConfig();
     
     try {

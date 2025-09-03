@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 import { googlePlayScraper } from '../../lib/googlePlayScraper';
 
 export async function GET() {

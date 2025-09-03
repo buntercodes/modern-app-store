@@ -1,6 +1,6 @@
 "use client";
 
-import { Star, Download, Share2, Check, Users, Globe, Smartphone, Shield, Zap, MoreVertical, Bookmark, Eye, Info, ExternalLink } from "lucide-react";
+import { Star, Download, Share2, Check, Users, Smartphone, Shield, Zap, MoreVertical, Bookmark, Eye, Info, ExternalLink } from "lucide-react";
 import Header from "../../components/Header";
 import Breadcrumb from "../../components/Breadcrumb";
 import { useEffect, useState, use } from "react";
@@ -47,7 +47,7 @@ export default function AppDetailPage({ params }: { params: Promise<{ id: string
   if (loading) {
     return (
       <div className="min-h-screen bg-white">
-        <Header showSearch={false} />
+        <Header />
         <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="animate-pulse">
             <div className="bg-white rounded-xl border border-gray-200 p-6 mb-6">
@@ -77,7 +77,7 @@ export default function AppDetailPage({ params }: { params: Promise<{ id: string
   if (error || !app) {
     return (
       <div className="min-h-screen bg-white">
-        <Header showSearch={false} />
+        <Header />
         <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="text-center py-12">
             <div className="text-red-500 text-xl mb-4">⚠️</div>
@@ -103,7 +103,7 @@ export default function AppDetailPage({ params }: { params: Promise<{ id: string
 
   return (
     <div className="min-h-screen bg-white">
-      <Header showSearch={false} />
+      <Header />
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         {/* Breadcrumb Navigation */}

@@ -5,6 +5,7 @@ import { Search, Play, Shield, Menu, X, Loader2, Clock, TrendingUp, Star } from 
 import { useAuth } from "../context/AuthContext";
 import { useSearch } from "../context/SearchContext";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import AccountMenu from "./AccountMenu";
 
 interface HeaderProps {
@@ -112,7 +113,7 @@ export default function Header({ className }: HeaderProps) {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="flex items-center">
-            <a href="/" className="flex items-center space-x-3 hover:opacity-80 transition-opacity">
+            <Link href="/" className="flex items-center space-x-3 hover:opacity-80 transition-opacity">
               <div className="w-8 h-8 rounded-lg overflow-hidden">
                 <img 
                   src="/logo_test.png" 
@@ -121,7 +122,7 @@ export default function Header({ className }: HeaderProps) {
                 />
               </div>
               <span className="text-xl font-medium text-gray-900">App Store</span>
-            </a>
+            </Link>
           </div>
 
           {/* Desktop Navigation */}
