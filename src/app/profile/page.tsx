@@ -1,6 +1,6 @@
-import { User, Settings, Download, Heart, Clock, Star, Play, Edit, Grid3X3, List, Filter, Plus, Bell, CreditCard, HelpCircle, Shield } from "lucide-react";
+import { User, Settings, Download, Heart, Star, Edit, Grid3X3, List, Filter, Plus, Bell, CreditCard, HelpCircle, Shield } from "lucide-react";
 import Header from "../components/Header";
-import Breadcrumb, { BreadcrumbItem } from "../components/Breadcrumb";
+import Breadcrumb from "../components/Breadcrumb";
 
 export default function ProfilePage() {
   // Mock user data - in real app this would come from API

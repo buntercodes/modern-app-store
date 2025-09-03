@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
-export function middleware(request: NextRequest) {
+export function middleware() {
   // For now, just pass through all requests
   // In production, you'd want to add server-side authentication here
   return NextResponse.next();

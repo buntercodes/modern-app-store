@@ -36,15 +36,20 @@ export default function AppwriteDiagnostic() {
           await appwriteService.getApps(1, 0);
           connectionValid = true;
           permissionsValid = true;
-        } catch (err: any) {
+        } catch (err: unknown) {
           connectionValid = false;
-          if (err.message?.includes('Permission denied')) {
-            permissionsValid = false;
-            error = 'Permission denied. Check collection permissions.';
-          } else if (err.message?.includes('not found')) {
-            error = 'Database or collection not found. Check IDs.';
+          if (err && typeof err === 'object' && 'message' in err) {
+            const errorMessage = (err as { message: string }).message;
+            if (errorMessage.includes('Permission denied')) {
+              permissionsValid = false;
+              error = 'Permission denied. Check collection permissions.';
+            } else if (errorMessage.includes('not found')) {
+              error = 'Database or collection not found. Check IDs.';
+            } else {
+              error = errorMessage || 'Connection failed.';
+            }
           } else {
-            error = err.message || 'Connection failed.';
+            error = 'Connection failed.';
           }
         }
       } else {
@@ -57,12 +62,12 @@ export default function AppwriteDiagnostic() {
         permissions: permissionsValid,
         error: error || undefined
       });
-    } catch (err: any) {
+    } catch (err: unknown) {
       setResults({
         config: false,
         connection: false,
         permissions: false,
-        error: err.message || 'Unknown error occurred'
+        error: (err && typeof err === 'object' && 'message' in err) ? (err as { message: string }).message : 'Unknown error occurred'
       });
     } finally {
       setIsChecking(false);

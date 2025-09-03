@@ -4,8 +4,8 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '../context/AuthContext';
 import { useFormInteraction } from '../hooks/useFormInteraction';
-import { Eye, EyeOff, Mail, Lock, AlertCircle, ArrowRight, UserPlus, Shield } from 'lucide-react';
-import Breadcrumb, { BreadcrumbItem } from '../components/Breadcrumb';
+import { Eye, EyeOff, Mail, Lock, AlertCircle, ArrowRight, Shield } from 'lucide-react';
+import Breadcrumb from '../components/Breadcrumb';
 
 export default function LoginPage() {
   const router = useRouter();
@@ -158,7 +158,7 @@ export default function LoginPage() {
                   <p className="mt-1 text-sm text-red-700">{error}</p>
                   {error.includes('Invalid credentials') && (
                     <div className="mt-2 text-xs text-red-600">
-                      💡 Make sure you're using the correct email and password
+                      💡 Make sure you&apos;re using the correct email and password
                     </div>
                   )}
                 </div>
@@ -190,7 +190,7 @@ export default function LoginPage() {
           {/* Register Link */}
           <div className="text-center">
             <p className="text-sm text-gray-600">
-              Don't have an account?{' '}
+              Don&apos;t have an account?{' '}
               <button
                 onClick={() => router.push('/register')}
                 className="font-medium text-green-600 hover:text-green-500 transition-colors"

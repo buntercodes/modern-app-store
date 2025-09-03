@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useAuth } from '../context/AuthContext';
 import { useFormInteraction } from '../hooks/useFormInteraction';
 import { Eye, EyeOff, User, Mail, Lock, AlertCircle, CheckCircle, ArrowLeft } from 'lucide-react';
-import Breadcrumb, { BreadcrumbItem } from '../components/Breadcrumb';
+import Breadcrumb from '../components/Breadcrumb';
 
 export default function RegisterPage() {
   const router = useRouter();

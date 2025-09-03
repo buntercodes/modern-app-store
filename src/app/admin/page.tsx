@@ -14,7 +14,7 @@ import {
   BarChart3,
   Shield
 } from 'lucide-react';
-import Breadcrumb, { BreadcrumbItem } from '../components/Breadcrumb';
+import Breadcrumb from '../components/Breadcrumb';
 
 export default function AdminDashboard() {
   // Mock data - in real app this would come from API
@@ -68,7 +68,7 @@ export default function AdminDashboard() {
         <div>
           <h1 className="text-3xl font-bold text-gray-900">Admin Dashboard</h1>
           <p className="mt-2 text-lg text-gray-600">
-            Welcome back! Here's what's happening with your app store today.
+            Welcome back! Here&apos;s what&apos;s happening with your app store today.
           </p>
         </div>
         <div>

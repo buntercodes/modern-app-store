@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import { Loader2, Search } from "lucide-react";
 import Header from "../components/Header";
-import Breadcrumb, { BreadcrumbItem } from "../components/Breadcrumb";
+import Breadcrumb from "../components/Breadcrumb";
 import { useSearch } from "../context/SearchContext";
 import AppCard from "../components/AppCard";
 import AppCardSkeleton from "../components/AppCardSkeleton";

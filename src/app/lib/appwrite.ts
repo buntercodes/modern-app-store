@@ -141,18 +141,21 @@ export class AppwriteService {
         ...(row as unknown as AppRowTable1),
         table2Data
       };
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('❌ Error creating app:', error);
       
       // Provide specific error messages
-      if (error.code === 401) {
-        throw new Error('Authentication failed. Check your project ID.');
-      } else if (error.code === 404) {
-        throw new Error('Database or table not found. Check your database and table IDs.');
-      } else if (error.code === 403) {
-        throw new Error('Permission denied. Check your table permissions.');
-      } else if (error.code === 400) {
-        throw new Error('Invalid data format. Check your app data structure.');
+      if (error && typeof error === 'object' && 'code' in error) {
+        const errorCode = (error as { code: number }).code;
+        if (errorCode === 401) {
+          throw new Error('Authentication failed. Check your project ID.');
+        } else if (errorCode === 404) {
+          throw new Error('Database or table not found. Check your database and table IDs.');
+        } else if (errorCode === 403) {
+          throw new Error('Permission denied. Check your table permissions.');
+        } else if (errorCode === 400) {
+          throw new Error('Invalid data format. Check your app data structure.');
+        }
       }
       
       throw error;
@@ -253,12 +256,15 @@ export class AppwriteService {
       );
       
       // Filter results based on search term
-      const filteredApps = response.documents.filter((doc: any) => 
-        doc.app_title?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        doc.app_package?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        doc.app_description?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        doc.app_developer_name?.toLowerCase().includes(searchTerm.toLowerCase())
-      );
+      const filteredApps = response.documents.filter((doc: unknown) => {
+        const docObj = doc as Record<string, unknown>;
+        return (
+          (docObj.app_title as string)?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          (docObj.app_package as string)?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          (docObj.app_description as string)?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          (docObj.app_developer_name as string)?.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+      });
       
       return filteredApps as unknown as AppRow[];
     } catch (error) {

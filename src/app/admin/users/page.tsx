@@ -1,7 +1,7 @@
 "use client";
 
 import { Users, Plus, Search, Filter } from 'lucide-react';
-import Breadcrumb, { BreadcrumbItem } from '../../components/Breadcrumb';
+import Breadcrumb from '../../components/Breadcrumb';
 
 export default function UserManagementPage() {
   return (

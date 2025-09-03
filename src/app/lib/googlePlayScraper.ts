@@ -51,38 +51,38 @@ export interface CategoryParams {
 
 class GooglePlayScraperService {
   // Transform Google Play scraper data to our standardized format
-  private transformAppData(app: any): GooglePlayApp {
+  private transformAppData(app: Record<string, unknown>): GooglePlayApp {
     return {
-      appId: app.appId || app.id || '',
-      title: app.title || '',
-      summary: app.summary || '',
-      description: app.description || '',
+      appId: (app.appId as string) || (app.id as string) || '',
+      title: (app.title as string) || '',
+      summary: (app.summary as string) || '',
+      description: (app.description as string) || '',
       developer: {
-        devId: app.developer || app.developerId || '',
-        url: app.developerWebsite || app.developerURL || ''
+        devId: (app.developer as string) || (app.developerId as string) || '',
+        url: (app.developerWebsite as string) || (app.developerURL as string) || ''
       },
-      icon: app.icon || '',
-      score: app.score || 0,
-      scoreText: app.scoreText || '',
-      price: app.price || 0,
-      free: app.free !== undefined ? app.free : (app.price === 0),
-      url: app.url || '',
-      playstoreUrl: app.url || '',
-      currency: app.currency || 'USD',
-      categories: app.genre || app.categories?.[0] || '',
+      icon: (app.icon as string) || '',
+      score: (app.score as number) || 0,
+      scoreText: (app.scoreText as string) || '',
+      price: (app.price as number) || 0,
+      free: app.free !== undefined ? (app.free as boolean) : ((app.price as number) === 0),
+      url: (app.url as string) || '',
+      playstoreUrl: (app.url as string) || '',
+      currency: (app.currency as string) || 'USD',
+      categories: (app.genre as string) || ((app.categories as string[])?.[0]) || '',
       permissions: app.permissions ? JSON.stringify(app.permissions) : '',
       similar: app.similarApps ? JSON.stringify(app.similarApps) : '',
       reviews: app.reviews ? JSON.stringify(app.reviews) : '',
       datasafety: app.dataSafety ? JSON.stringify(app.dataSafety) : '',
-      size: app.size || '',
-      installs: app.installs || '',
-      version: app.version || '',
-      androidVersion: app.androidVersion || '',
-      contentRating: app.contentRating || '',
-      video: app.video || '',
-      privacyPolicy: app.privacyPolicy || '',
-      genre: app.genre || '',
-      screenshots: app.screenshots || []
+      size: (app.size as string) || '',
+      installs: (app.installs as string) || '',
+      version: (app.version as string) || '',
+      androidVersion: (app.androidVersion as string) || '',
+      contentRating: (app.contentRating as string) || '',
+      video: (app.video as string) || '',
+      privacyPolicy: (app.privacyPolicy as string) || '',
+      genre: (app.genre as string) || '',
+      screenshots: (app.screenshots as string[]) || []
     };
   }
 
@@ -97,47 +97,47 @@ class GooglePlayScraperService {
       
       console.log(`🔍 Scraping ${category} apps with collection ${collection}, limit: ${limit}`);
       
-      let apps: any[] = [];
+      let apps: Record<string, unknown>[] = [];
       
       switch (collection) {
         case 'TOP_FREE':
           apps = await gplay.list({
-            category: category as any,
+            category: category as never,
             collection: gplay.collection.TOP_FREE,
             num: limit
           });
           break;
         case 'TOP_PAID':
           apps = await gplay.list({
-            category: category as any,
+            category: category as never,
             collection: gplay.collection.TOP_PAID,
             num: limit
           });
           break;
         case 'NEW_FREE':
           apps = await gplay.list({
-            category: category as any,
+            category: category as never,
             collection: gplay.collection.NEW_FREE,
             num: limit
           });
           break;
         case 'NEW_PAID':
           apps = await gplay.list({
-            category: category as any,
+            category: category as never,
             collection: gplay.collection.NEW_PAID,
             num: limit
           });
           break;
         case 'GROSSING':
           apps = await gplay.list({
-            category: category as any,
+            category: category as never,
             collection: gplay.collection.GROSSING,
             num: limit
           });
           break;
         default:
           apps = await gplay.list({
-            category: category as any,
+            category: category as never,
             collection: gplay.collection.TOP_FREE,
             num: limit
           });
@@ -162,7 +162,7 @@ class GooglePlayScraperService {
       
       console.log(`🔍 Searching for: "${term}" with limit: ${limit}`);
       
-      const searchOptions: any = {
+      const searchOptions: Record<string, unknown> = {
         term,
         num: limit
       };

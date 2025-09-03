@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from 'react';
-import { Save, Globe, Shield, Bell } from 'lucide-react';
-import Breadcrumb, { BreadcrumbItem } from '../../components/Breadcrumb';
+import { Save, Globe, Shield } from 'lucide-react';
+import Breadcrumb from '../../components/Breadcrumb';
 
 export default function AdminSettingsPage() {
   const [storeName, setStoreName] = useState('Modern App Store');

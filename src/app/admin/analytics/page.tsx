@@ -1,7 +1,7 @@
 "use client";
 
 import { BarChart3, TrendingUp, Users, Download, Star } from 'lucide-react';
-import Breadcrumb, { BreadcrumbItem } from '../../components/Breadcrumb';
+import Breadcrumb from '../../components/Breadcrumb';
 
 export default function AnalyticsPage() {
   return (

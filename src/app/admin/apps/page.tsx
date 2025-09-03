@@ -4,19 +4,15 @@ import { useState } from 'react';
 import { 
   Plus, 
   Search, 
-  Filter, 
-  MoreVertical, 
   Edit, 
   Trash2, 
   Eye, 
   CheckCircle, 
-  XCircle, 
   Clock,
-  Download,
   Star,
   AppWindow
 } from 'lucide-react';
-import Breadcrumb, { BreadcrumbItem } from '../../components/Breadcrumb';
+import Breadcrumb from '../../components/Breadcrumb';
 
 export default function AppManagementPage() {
   const [searchTerm, setSearchTerm] = useState('');

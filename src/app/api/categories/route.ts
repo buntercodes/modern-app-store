@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { googlePlayScraper } from '../../lib/googlePlayScraper';
 
-export async function GET(request: NextRequest) {
+export async function GET() {
   try {
     console.log(`🚀 API Route: Getting available categories`);
     

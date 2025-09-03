@@ -1,7 +1,7 @@
 import { Metadata } from "next";
-import { Laptop, Gamepad2, Palette, Code, Database, Shield, Camera, Music, Heart, BookOpen, Globe, Zap, Users, ShoppingCart, Car, Home, Plane, GraduationCap, Briefcase, Leaf, Palette as ArtIcon, Play, Smartphone, Watch, Car as CarIcon, Scissors, Book, Building, MessageSquare, Calendar, DollarSign, Utensils, Dumbbell, House, Library, MapPin, Stethoscope, Newspaper, Baby, Palette as PersonalizationIcon, Camera as PhotoIcon, Briefcase as ProductivityIcon, ShoppingBag, Users as SocialIcon, Trophy, Navigation, Video, Clock, Cloud, Gamepad2 as GameIcon, Puzzle, Dice1, Circle, Coffee, GraduationCap as EducationIcon, Music as MusicIcon, Puzzle as PuzzleIcon, Car as RacingIcon, Sword, Building as SimulationIcon, Trophy as SportsIcon, Crown, HelpCircle, Type, Users as FamilyIcon } from "lucide-react";
+import { Gamepad2, Palette, Shield, Camera, Music, Heart, BookOpen, Globe, Zap, Users, ShoppingCart, Car, Home, Plane, GraduationCap, Briefcase, Leaf, Play, Smartphone, Watch, Scissors, Book, Building, MessageSquare, Calendar, DollarSign, Utensils, Dumbbell, House, Library, MapPin, Stethoscope, Newspaper, Baby, ShoppingBag, Trophy, Navigation, Video, Clock, Cloud, Dice1, Circle, Coffee, Sword, Crown, HelpCircle, Type } from "lucide-react";
 import Header from "../components/Header";
-import Breadcrumb, { BreadcrumbItem } from "../components/Breadcrumb";
+import Breadcrumb from "../components/Breadcrumb";
 
 // SEO-optimized metadata for android app categories page
 export const metadata: Metadata = {
@@ -278,7 +278,7 @@ export default function AndroidAppCategoriesPage() {
             <div className="prose prose-gray max-w-none">
               <p className="text-gray-700 leading-relaxed mb-4">
                 Our Android app categories are carefully organized to help you find the perfect applications for your needs. 
-                Whether you're looking for <a href="/free-download-android-apps" className="text-green-600 hover:text-green-700 font-medium">productivity tools</a> to boost your efficiency, 
+                Whether you&apos;re looking for <a href="/free-download-android-apps" className="text-green-600 hover:text-green-700 font-medium">productivity tools</a> to boost your efficiency, 
                 <a href="/free-download-android-games" className="text-green-600 hover:text-green-700 font-medium"> entertainment and games</a> for fun, 
                 or <a href="/search" className="text-green-600 hover:text-green-700 font-medium">business applications</a> for work, 
                 our categories make it easy to discover the best Android apps.
@@ -290,7 +290,7 @@ export default function AndroidAppCategoriesPage() {
                 <a href="/search?filter=entertainment" className="text-green-600 hover:text-green-700 font-medium"> entertainment apps</a> to 
                 <a href="/search?filter=business" className="text-green-600 hover:text-green-700 font-medium"> business tools</a> and 
                 <a href="/search?filter=education" className="text-green-600 hover:text-green-700 font-medium"> educational apps</a>, 
-                you'll find high-quality options in every category.
+                you&apos;ll find high-quality options in every category.
               </p>
               
               <p className="text-gray-700 leading-relaxed">

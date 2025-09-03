@@ -9,19 +9,16 @@ import Link from "next/link";
 
 interface HybridHomePageProps {
   initialData: {
-    recommendedApps: any[];
-    toolsApps: any[];
-    trendingApps: any[];
+    recommendedApps: Record<string, unknown>[];
+    toolsApps: Record<string, unknown>[];
+    trendingApps: Record<string, unknown>[];
   };
 }
 
 export default function HybridHomePage({ initialData }: HybridHomePageProps) {
-  const [appsData, setAppsData] = useState(initialData);
-  const [isClient, setIsClient] = useState(false);
+  const [appsData] = useState(initialData);
 
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
+
 
 
 
@@ -72,7 +69,7 @@ export default function HybridHomePage({ initialData }: HybridHomePageProps) {
   ];
 
   // Custom snippets for trending apps
-  const getCustomSnippet = (app: any) => {
+  const getCustomSnippet = (app: Record<string, unknown>) => {
     const snippets = {
       'com.whatsapp': 'WhatsApp – free messaging app with latest update APK download',
       'com.spotify.music': 'Spotify Music – stream millions of songs with premium features APK',
@@ -297,11 +294,11 @@ export default function HybridHomePage({ initialData }: HybridHomePageProps) {
               <p className="text-gray-700 leading-relaxed mb-4">
                 All our APK files are thoroughly scanned for malware and viruses before being made available for download. 
                 We maintain a comprehensive database of verified applications, regularly updating our collection with the 
-                newest releases and most popular apps. Whether you're looking for 
+                newest releases and most popular apps.                 Whether you&apos;re looking for 
                 <Link href="/categories?filter=photography" className="text-green-600 hover:text-green-700 font-medium"> photography apps</Link>, 
                 <Link href="/categories?filter=music" className="text-green-600 hover:text-green-700 font-medium"> music streaming services</Link>, or 
                 <Link href="/categories?filter=security" className="text-green-600 hover:text-green-700 font-medium"> security tools</Link>, 
-                you'll find them all here with fast download speeds and reliable installation.
+                you&apos;ll find them all here with fast download speeds and reliable installation.
               </p>
               
               <p className="text-gray-700 leading-relaxed">

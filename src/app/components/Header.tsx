@@ -8,12 +8,12 @@ import { useRouter } from "next/navigation";
 import AccountMenu from "./AccountMenu";
 
 interface HeaderProps {
-  // No props needed - search bar always shown
+  className?: string;
 }
 
-export default function Header({}: HeaderProps) {
+export default function Header({ className }: HeaderProps) {
   const { isAuthenticated, user } = useAuth();
-  const { searchTerm, setSearchTerm, performSearch, isLoading, recentSearches, searchResults } = useSearch();
+  const { setSearchTerm, performSearch, isLoading, recentSearches, searchResults } = useSearch();
   const router = useRouter();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [showSearchSuggestions, setShowSearchSuggestions] = useState(false);
@@ -237,7 +237,7 @@ export default function Header({}: HeaderProps) {
                           className="w-full mt-3 px-3 py-2 text-sm text-green-600 hover:bg-green-50 rounded-lg border border-green-200 hover:border-green-300 transition-all flex items-center justify-center"
                         >
                           <Search className="w-4 h-4 mr-2" />
-                          View all results for "{localSearchTerm}"
+                          View all results for &quot;{localSearchTerm}&quot;
                         </button>
                       </div>
                     )}
@@ -266,7 +266,7 @@ export default function Header({}: HeaderProps) {
                     {localSearchTerm.length > 2 && searchResults.length === 0 && !isLoading && (
                       <div className="p-4 text-center">
                         <Search className="w-8 h-8 text-gray-300 mx-auto mb-2" />
-                        <div className="text-sm text-gray-500">No apps found for "{localSearchTerm}"</div>
+                        <div className="text-sm text-gray-500">No apps found for &quot;{localSearchTerm}&quot;</div>
                         <button
                           onClick={() => {
                             setShowSearchSuggestions(false);

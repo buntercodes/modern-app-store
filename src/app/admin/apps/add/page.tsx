@@ -2,14 +2,12 @@
 
 import { useState } from 'react';
 import { 
-  Plus, 
   Search, 
   Save, 
   X, 
   Loader2, 
   ExternalLink, 
   Star, 
-  Download,
   AlertCircle,
   CheckCircle
 } from 'lucide-react';
@@ -17,7 +15,7 @@ import { useRouter } from 'next/navigation';
 import { appwriteService } from '../../../lib/appwrite';
 import { useAuth } from '../../../context/AuthContext';
 import AppwriteDiagnostic from '../../../components/AppwriteDiagnostic';
-import Breadcrumb, { BreadcrumbItem } from '../../../components/Breadcrumb';
+import Breadcrumb from '../../../components/Breadcrumb';
 
 interface AppLookupData {
   appId: string;
@@ -181,19 +179,19 @@ export default function AddAppPage() {
         router.push('/admin/apps');
       }, 2000);
       
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('❌ Failed to save app:', error);
       setSaveStatus('error');
       
       // Show more specific error message
-      const errorMessage = error.message || 'Unknown error occurred';
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
       alert(`Failed to save app: ${errorMessage}\n\nPlease check the browser console for more details.`);
     } finally {
       setIsSaving(false);
     }
   };
 
-  const handleInputChange = (field: string, value: any) => {
+  const handleInputChange = (field: string, value: string | boolean) => {
     setFormData(prev => ({
       ...prev,
       [field]: value

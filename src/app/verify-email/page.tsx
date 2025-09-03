@@ -24,7 +24,7 @@ export default function VerifyEmailPage() {
     }
   }, [searchParams]);
 
-  const handleEmailVerification = async (userId: string, secret: string) => {
+  const handleEmailVerification = async (_userId: string, _secret: string) => {
     setIsVerifying(true);
     
     try {
@@ -34,7 +34,7 @@ export default function VerifyEmailPage() {
       
       setVerificationStatus('success');
       setMessage('Your email has been verified successfully!');
-    } catch (error) {
+    } catch (_error) {
       setVerificationStatus('error');
       setMessage('Email verification failed. Please try again.');
     } finally {
@@ -141,7 +141,7 @@ export default function VerifyEmailPage() {
             Verify Your Email
           </h2>
           <p className="mt-2 text-sm text-gray-600">
-            We've sent a verification link to your email address. Please check your inbox and click the link to verify your account.
+            We&apos;ve sent a verification link to your email address. Please check your inbox and click the link to verify your account.
           </p>
           
           {error && (

@@ -175,7 +175,7 @@ export class AppwriteAuthService {
   }
 
   // Helper method to extract error messages
-  private getErrorMessage(error: any): string {
+  private getErrorMessage(error: unknown): string {
     // Handle AppwriteException specifically
     if (error?.type === 'general_unauthorized_scope' || error?.code === 401) {
       return 'Invalid credentials. Please check your email and password.';

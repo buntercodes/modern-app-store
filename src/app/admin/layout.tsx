@@ -18,7 +18,7 @@ import {
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { useRouter } from 'next/navigation';
-import Breadcrumb, { BreadcrumbItem } from '../components/Breadcrumb';
+// import Breadcrumb, { BreadcrumbItem } from '../components/Breadcrumb';
 
 interface AdminLayoutProps {
   children: React.ReactNode;
@@ -51,7 +51,7 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
         <div className="text-center">
           <Shield className="w-16 h-16 text-red-500 mx-auto mb-4" />
           <h1 className="text-2xl font-bold text-gray-900 mb-2">Access Denied</h1>
-          <p className="text-gray-600 mb-4">You don't have permission to access the admin panel.</p>
+          <p className="text-gray-600 mb-4">You don&apos;t have permission to access the admin panel.</p>
           <button
             onClick={() => router.push('/')}
             className="bg-green-500 text-white px-6 py-2 rounded-lg hover:bg-green-600 transition-colors"

@@ -45,7 +45,7 @@ export default function ForgotPasswordPage() {
               Check your email
             </h2>
             <p className="mt-2 text-sm text-gray-600">
-              We've sent a password recovery link to <strong>{email}</strong>
+              We&apos;ve sent a password recovery link to <strong>{email}</strong>
             </p>
             <p className="mt-4 text-sm text-gray-500">
               Please check your email and follow the instructions to reset your password.
@@ -77,7 +77,7 @@ export default function ForgotPasswordPage() {
             Forgot your password?
           </h2>
           <p className="mt-2 text-sm text-gray-600">
-            No worries, we'll send you reset instructions
+            No worries, we&apos;ll send you reset instructions
           </p>
         </div>
 

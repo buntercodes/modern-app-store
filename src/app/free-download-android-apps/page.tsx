@@ -72,7 +72,7 @@ export default function FreeDownloadAndroidAppsPage() {
             </div>
             <h2 className="text-2xl font-bold text-gray-900 mb-2">Free Android Apps Coming Soon</h2>
             <p className="text-gray-600 mb-6">
-              We're working on bringing you the best collection of free Android apps for download. 
+              We&apos;re working on bringing you the best collection of free Android apps for download. 
               Check back soon for our curated selection of productivity, communication, 
               and utility applications available as free APK downloads.
             </p>
@@ -107,10 +107,10 @@ export default function FreeDownloadAndroidAppsPage() {
               </p>
               
               <p className="text-gray-700 leading-relaxed mb-4">
-                Whether you're looking for <a href="/categories?filter=productivity" className="text-green-600 hover:text-green-700 font-medium">free productivity apps</a> to boost your efficiency, 
+                Whether you&apos;re looking for <a href="/categories?filter=productivity" className="text-green-600 hover:text-green-700 font-medium">free productivity apps</a> to boost your efficiency, 
                 <a href="/categories?filter=communication" className="text-green-600 hover:text-green-700 font-medium"> free communication tools</a> to stay connected, 
                 or <a href="/categories?filter=utilities" className="text-green-600 hover:text-green-700 font-medium">free utility applications</a> for your daily needs, 
-                you'll find high-quality options in our collection.
+                you&apos;ll find high-quality options in our collection.
               </p>
               
               <p className="text-gray-700 leading-relaxed">

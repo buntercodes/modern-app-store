@@ -1,6 +1,6 @@
 // Google Play API service for fetching app data
 // Note: Now using built-in scraper instead of external API
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || '';
+// const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || '';
 
 export interface GooglePlayApp {
   appId: string;
@@ -39,7 +39,7 @@ export interface CategoryParams {
 }
 
 class GooglePlayApiService {
-  private async makeRequest<T>(endpoint: string, params?: Record<string, any>): Promise<T> {
+  private async makeRequest<T>(endpoint: string, params?: Record<string, unknown>): Promise<T> {
     try {
       // Use relative URLs since we're now using built-in API routes
       const url = new URL(endpoint, window.location.origin);

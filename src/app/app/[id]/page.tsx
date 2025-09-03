@@ -1,9 +1,10 @@
 "use client";
 
-import { Star, Download, Share2, Heart, Check, Clock, Users, Globe, Smartphone, Shield, Zap, MoreVertical, Bookmark, Calendar, Eye, Shield as PrivacyIcon, Info, ExternalLink } from "lucide-react";
+import { Star, Download, Share2, Check, Users, Globe, Smartphone, Shield, Zap, MoreVertical, Bookmark, Eye, Info, ExternalLink } from "lucide-react";
 import Header from "../../components/Header";
-import Breadcrumb, { BreadcrumbItem } from "../../components/Breadcrumb";
+import Breadcrumb from "../../components/Breadcrumb";
 import { useEffect, useState, use } from "react";
+import Link from "next/link";
 import { GooglePlayApp } from "../../services/googlePlayApi";
 
 export default function AppDetailPage({ params }: { params: Promise<{ id: string }> }) {
@@ -82,9 +83,9 @@ export default function AppDetailPage({ params }: { params: Promise<{ id: string
             <div className="text-red-500 text-xl mb-4">⚠️</div>
             <h1 className="text-2xl font-bold text-gray-900 mb-2">App Not Found</h1>
             <p className="text-gray-600 mb-6">{error || 'The requested app could not be loaded.'}</p>
-            <a href="/" className="bg-green-500 text-white px-6 py-3 rounded-lg hover:bg-green-600 transition-colors font-medium">
+            <Link href="/" className="bg-green-500 text-white px-6 py-3 rounded-lg hover:bg-green-600 transition-colors font-medium">
               Return to Store
-            </a>
+            </Link>
           </div>
         </main>
       </div>

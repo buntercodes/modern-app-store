@@ -1,7 +1,7 @@
 "use client";
 
 import { Shield, AlertTriangle, Lock, Eye, Key } from 'lucide-react';
-import Breadcrumb, { BreadcrumbItem } from '../../components/Breadcrumb';
+import Breadcrumb from '../../components/Breadcrumb';
 
 export default function SecurityPage() {
   return (

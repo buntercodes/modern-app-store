@@ -72,7 +72,7 @@ export default function FreeDownloadAndroidGamesPage() {
             </div>
             <h2 className="text-2xl font-bold text-gray-900 mb-2">Free Android Games Coming Soon</h2>
             <p className="text-gray-600 mb-6">
-              We're working on bringing you the best collection of free Android games for download. 
+              We&apos;re working on bringing you the best collection of free Android games for download. 
               Check back soon for our curated selection of action, puzzle, racing, 
               and adventure games available as free APK downloads.
             </p>
@@ -107,11 +107,11 @@ export default function FreeDownloadAndroidGamesPage() {
               </p>
               
               <p className="text-gray-700 leading-relaxed mb-4">
-                Whether you're looking for <a href="/categories?filter=action-games" className="text-blue-600 hover:text-blue-700 font-medium">free action games</a> for thrilling gameplay, 
+                Whether you&apos;re looking for <a href="/categories?filter=action-games" className="text-blue-600 hover:text-blue-700 font-medium">free action games</a> for thrilling gameplay, 
                 <a href="/categories?filter=puzzle-games" className="text-blue-600 hover:text-blue-700 font-medium"> free puzzle games</a> to challenge your mind, 
                 <a href="/categories?filter=racing-games" className="text-blue-600 hover:text-blue-700 font-medium"> free racing games</a> for high-speed excitement, 
                 or <a href="/categories?filter=adventure-games" className="text-blue-600 hover:text-blue-700 font-medium">free adventure games</a> for immersive experiences, 
-                you'll find high-quality options in our collection.
+                you&apos;ll find high-quality options in our collection.
               </p>
               
               <p className="text-gray-700 leading-relaxed">
