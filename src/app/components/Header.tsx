@@ -83,6 +83,20 @@ export default function Header({}: HeaderProps) {
     setTimeout(() => setShowSearchSuggestions(false), 200);
   };
 
+  const handleClearSearch = () => {
+    setLocalSearchTerm('');
+    setSearchTerm('');
+    setShowSearchSuggestions(false);
+    // Clear any pending search timeout
+    if (searchTimeoutRef.current) {
+      clearTimeout(searchTimeoutRef.current);
+    }
+    // Focus back to input after clearing
+    if (searchInputRef.current) {
+      searchInputRef.current.focus();
+    }
+  };
+
   // Cleanup timeout on unmount
   useEffect(() => {
     return () => {
@@ -135,7 +149,16 @@ export default function Header({}: HeaderProps) {
             <div className="w-80">
               <form onSubmit={handleSearchSubmit} className="relative">
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-                {isLoading && (
+                {localSearchTerm && (
+                  <button
+                    type="button"
+                    onClick={handleClearSearch}
+                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors w-4 h-4 flex items-center justify-center"
+                  >
+                    <X className="w-4 h-4" />
+                  </button>
+                )}
+                {isLoading && !localSearchTerm && (
                   <Loader2 className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4 animate-spin" />
                 )}
                 <input
@@ -284,7 +307,16 @@ export default function Header({}: HeaderProps) {
             <div className="relative">
               <form onSubmit={handleSearchSubmit}>
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
-                {isLoading && (
+                {localSearchTerm && (
+                  <button
+                    type="button"
+                    onClick={handleClearSearch}
+                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors w-3 h-3 flex items-center justify-center"
+                  >
+                    <X className="w-3 h-3" />
+                  </button>
+                )}
+                {isLoading && !localSearchTerm && (
                   <Loader2 className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-3 h-3 animate-spin" />
                 )}
                 <input
