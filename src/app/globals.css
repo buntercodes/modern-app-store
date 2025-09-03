@@ -54,6 +54,13 @@ body {
   transition-duration: 150ms;
 }
 
+/* Reset transitions for specific elements */
+*:focus,
+*:hover,
+*:active {
+  transition-duration: 150ms;
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
