@@ -1,7 +1,7 @@
 "use client";
 
 import { Star, Download, ExternalLink } from 'lucide-react';
-import { GooglePlayApp } from '../services/googlePlayApi';
+import { GooglePlayApp } from '../lib/googlePlayScraper';
 
 interface AppCardProps {
   app: GooglePlayApp;
@@ -24,9 +24,9 @@ export default function AppCard({ app, variant = 'compact', className = '' }: Ap
     return colors[index % colors.length];
   };
 
-  const formatDownloads = (downloads?: string) => {
-    if (!downloads) return 'Unknown';
-    return downloads;
+  const formatDownloads = (installs?: string) => {
+    if (!installs) return 'Unknown';
+    return installs;
   };
 
   if (variant === 'detailed') {
@@ -67,7 +67,7 @@ export default function AppCard({ app, variant = 'compact', className = '' }: Ap
                 <span className="text-gray-700">{app.score}</span>
               </div>
               <span>•</span>
-              <span>{formatDownloads(app.downloads)}</span>
+              <span>{formatDownloads(app.installs)}</span>
               {app.size && (
                 <>
                   <span>•</span>

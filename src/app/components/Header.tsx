@@ -8,11 +8,9 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import AccountMenu from "./AccountMenu";
 
-interface HeaderProps {
-  className?: string;
-}
+interface HeaderProps {}
 
-export default function Header({ className }: HeaderProps) {
+export default function Header({}: HeaderProps) {
   const { isAuthenticated, user } = useAuth();
   const { setSearchTerm, performSearch, isLoading, recentSearches, searchResults } = useSearch();
   const router = useRouter();
