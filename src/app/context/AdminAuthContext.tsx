@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { adminAuth, AdminUser } from '../lib/adminAuth';
-import { log } from '../lib/logger';
+// Removed unused import
 
 interface AdminAuthContextType {
   adminUser: AdminUser | null;

@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { Gamepad2, Palette, Music, Heart, BookOpen, Zap, GraduationCap, Leaf, Play, Smartphone, Watch, Scissors, Book, Building, MessageSquare, Calendar, DollarSign, Utensils, Dumbbell, House, Library, MapPin, Stethoscope, Newspaper, Baby, ShoppingBag, Trophy, Navigation, Video, Clock, Cloud, Dice1, Circle, Coffee, Sword, Crown, HelpCircle, Type, Car, Settings, Camera, Briefcase, Users } from "lucide-react";
+import { Gamepad2, Palette, Music, Heart, BookOpen, Zap, GraduationCap, Leaf, Play, Smartphone, Watch, Scissors, Book, Building, MessageSquare, Calendar, DollarSign, Utensils, Dumbbell, House, Library, MapPin, Stethoscope, Newspaper, Baby, ShoppingBag, Trophy, Navigation, Video, Clock, Cloud, Car, Settings, Camera, Briefcase, Users } from "lucide-react";
 import Header from "../components/Header";
 import Breadcrumb from "../components/Breadcrumb";
 

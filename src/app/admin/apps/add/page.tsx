@@ -524,9 +524,11 @@ export default function AddAppPage() {
                       <div className="flex items-start space-x-3">
                         {/* App Icon */}
                         <div className="relative">
-                          <img
+                          <Image
                             src={lookupData.icon}
                             alt={lookupData.title}
+                            width={64}
+                            height={64}
                             className="w-16 h-16 rounded-xl object-cover shadow-md"
                             onError={(e) => {
                               const target = e.target as HTMLImageElement;

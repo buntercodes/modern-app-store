@@ -6,7 +6,6 @@ import {
   Users, 
   Eye, 
   Clock, 
-  Globe, 
   Monitor, 
   Smartphone, 
   Tablet,
@@ -56,10 +55,6 @@ export default function AnalyticsDashboard() {
     end: new Date().toISOString().split('T')[0],
   });
 
-  useEffect(() => {
-    fetchAnalytics();
-  }, [dateRange]);
-
   const fetchAnalytics = async () => {
     try {
       setError(null);
@@ -81,6 +76,10 @@ export default function AnalyticsDashboard() {
       setRefreshing(false);
     }
   };
+
+  useEffect(() => {
+    fetchAnalytics();
+  }, [dateRange, fetchAnalytics]);
 
   const handleRefresh = () => {
     setRefreshing(true);

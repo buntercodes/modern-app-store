@@ -85,7 +85,7 @@ export default function CategoryDetailClient({ category }: CategoryDetailClientP
 
   useEffect(() => {
     loadApps();
-  }, [category]);
+  }, [category, loadApps]);
 
   if (loading) {
     return (
@@ -127,7 +127,7 @@ export default function CategoryDetailClient({ category }: CategoryDetailClientP
             No Apps Found
           </div>
           <p className="text-gray-500">
-            We couldn't find any apps in this category. Please try again later.
+            We couldn&apos;t find any apps in this category. Please try again later.
           </p>
         </div>
       </div>

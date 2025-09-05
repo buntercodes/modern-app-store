@@ -120,9 +120,11 @@ export default function AppDetailPage({ params }: { params: Promise<{ id: string
             {/* App Icon and Basic Info */}
             <div className="lg:col-span-1">
               {app.icon ? (
-                <img 
+                <Image 
                   src={app.icon} 
                   alt={app.title}
+                  width={128}
+                  height={128}
                   className="w-32 h-32 rounded-2xl object-cover mb-6"
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;

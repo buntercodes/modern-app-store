@@ -1,6 +1,6 @@
 "use client";
 
-import { BarChart3, TrendingUp, Users, Download, Star } from 'lucide-react';
+// Removed unused imports
 import Breadcrumb from '../../components/Breadcrumb';
 import AnalyticsDashboard from '../../components/AnalyticsDashboard';
 

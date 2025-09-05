@@ -38,9 +38,11 @@ export default function AppCard({ app, variant = 'compact', className = '' }: Ap
         <div className="flex items-start space-x-3">
           <div className="flex-shrink-0">
             {app.icon ? (
-              <img 
+              <Image 
                 src={app.icon} 
                 alt={app.title}
+                width={64}
+                height={64}
                 className="w-16 h-16 rounded-xl object-cover"
                 onError={(e) => {
                   const target = e.target as HTMLImageElement;
@@ -103,9 +105,11 @@ export default function AppCard({ app, variant = 'compact', className = '' }: Ap
     >
       <div className="mb-3">
         {app.icon ? (
-          <img 
+          <Image 
             src={app.icon} 
             alt={app.title}
+            width={64}
+            height={64}
             className="w-16 h-16 rounded-2xl mx-auto object-cover group-hover:scale-105 transition-transform"
             onError={(e) => {
               const target = e.target as HTMLImageElement;

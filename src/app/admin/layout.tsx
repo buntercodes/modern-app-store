@@ -76,7 +76,7 @@ function AdminLayoutContent({ children }: AdminLayoutProps) {
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, []);
+  }, [handleLogout]);
 
   // Show loading state while checking admin authentication
   if (authLoading) {

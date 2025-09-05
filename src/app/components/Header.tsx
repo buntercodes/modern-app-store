@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import Image from 'next/image';
 import { Search, Play, Shield, Menu, X, Loader2, Clock, TrendingUp, Star } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
 import { useSearch } from "../context/SearchContext";
@@ -12,7 +13,7 @@ interface HeaderProps {
   className?: string;
 }
 
-export default function Header({ className }: HeaderProps) {
+export default function Header({ }: HeaderProps) {
   const { isAuthenticated, user } = useAuth();
   const { setSearchTerm, performSearch, isLoading, recentSearches, searchResults } = useSearch();
   const router = useRouter();
@@ -115,9 +116,11 @@ export default function Header({ className }: HeaderProps) {
           <div className="flex items-center">
             <Link href="/" className="flex items-center space-x-3 hover:opacity-80 transition-opacity">
               <div className="w-8 h-8 rounded-lg overflow-hidden">
-                <img 
+                <Image 
                   src="/logo_test.png" 
                   alt="App Store Logo" 
+                  width={32}
+                  height={32}
                   className="w-full h-full object-cover"
                 />
               </div>
@@ -196,9 +199,11 @@ export default function Header({ className }: HeaderProps) {
                             >
                               <div className="flex items-center space-x-3">
                                 <div className="w-10 h-10 bg-gradient-to-br from-green-100 to-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                                  <img
+                                  <Image
                                     src={app.icon}
                                     alt={app.title}
+                                    width={32}
+                                    height={32}
                                     className="w-8 h-8 rounded-lg object-cover"
                                     onError={(e) => {
                                       const target = e.target as HTMLImageElement;
@@ -351,9 +356,11 @@ export default function Header({ className }: HeaderProps) {
                           className="w-full text-left p-3 hover:bg-gray-50 rounded-md flex items-center space-x-3"
                         >
                           <div className="w-10 h-10 bg-gradient-to-br from-green-100 to-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                            <img
+                            <Image
                               src={app.icon}
                               alt={app.title}
+                              width={32}
+                              height={32}
                               className="w-8 h-8 rounded object-cover"
                               onError={(e) => {
                                 const target = e.target as HTMLImageElement;

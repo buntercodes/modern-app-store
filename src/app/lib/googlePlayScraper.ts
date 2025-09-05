@@ -102,7 +102,7 @@ class GooglePlayScraperService {
       
       // Map category string to gplay category constant
       const getCategoryConstant = (cat: string) => {
-        const categoryMap: Record<string, any> = {
+        const categoryMap: Record<string, string> = {
           'GAME_ACTION': gplay.category.GAME_ACTION,
           'GAME_ADVENTURE': gplay.category.GAME_ADVENTURE,
           'GAME_ARCADE': gplay.category.GAME_ARCADE,

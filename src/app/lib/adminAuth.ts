@@ -1,5 +1,5 @@
-import { Client, Account, ID } from 'appwrite';
-import { log } from './logger';
+import { Client, Account } from 'appwrite';
+// Removed unused imports
 
 // Admin-specific Appwrite client (separate from main app)
 // Using a different session name to avoid conflicts

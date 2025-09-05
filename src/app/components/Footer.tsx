@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from 'next/image';
 
 
 export default function Footer() {
@@ -11,9 +12,11 @@ export default function Footer() {
           <div>
             <div className="flex items-center space-x-3 mb-4">
               <div className="w-10 h-10 rounded-lg overflow-hidden">
-                <img 
+                <Image 
                   src="/logo_test.png" 
                   alt="Modern App Store Logo" 
+                  width={40}
+                  height={40}
                   className="w-full h-full object-cover"
                 />
               </div>

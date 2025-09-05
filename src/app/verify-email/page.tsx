@@ -24,7 +24,7 @@ function VerifyEmailContent() {
     }
   }, [searchParams]);
 
-  const handleEmailVerification = async (_userId: string, _secret: string) => {
+  const handleEmailVerification = async () => {
     setIsVerifying(true);
     
     try {
@@ -34,7 +34,7 @@ function VerifyEmailContent() {
       
       setVerificationStatus('success');
       setMessage('Your email has been verified successfully!');
-    } catch (_error) {
+    } catch {
       setVerificationStatus('error');
       setMessage('Email verification failed. Please try again.');
     } finally {

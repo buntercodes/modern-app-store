@@ -6,7 +6,7 @@ import { AuthProvider } from "./context/AuthContext";
 import { SearchProvider } from "./context/SearchContext";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { Analytics } from '@vercel/analytics/next';
-import Footer from "./components/Footer";
+// Removed unused import
 
 const geistSans = Geist({
   variable: "--font-geist-sans",

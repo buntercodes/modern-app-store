@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from 'react';
+import Image from 'next/image';
 import { Star, Smartphone, Search, Filter, ArrowRight, Gamepad2, MessageSquare, Music, Camera, Shield, Zap } from "lucide-react";
 import Header from "./Header";
 import AppCard from "./AppCard";
@@ -171,9 +172,11 @@ export default function HybridHomePage({ initialData }: HybridHomePageProps) {
                   <div className="flex items-start space-x-4">
                     <div className="flex-shrink-0">
                       {app.icon && typeof app.icon === 'string' ? (
-                        <img 
+                        <Image 
                           src={app.icon} 
                           alt={app.title as string}
+                          width={64}
+                          height={64}
                           className="w-16 h-16 rounded-xl object-cover"
                         />
                       ) : (

@@ -10,7 +10,7 @@ export async function GET(request: NextRequest) {
 
     console.log(`🎮 Fetching ${limit} free Android games in category: ${category} (offset: ${offset})`);
 
-    let games: any[] = [];
+    let games: unknown[] = [];
 
     if (category === 'ALL_GAMES') {
       // For "All Games", fetch from multiple game categories and combine
@@ -21,7 +21,7 @@ export async function GET(request: NextRequest) {
       ];
       
       const gamesPerCategory = Math.ceil(limit / gameCategories.length);
-      const allGames: any[] = [];
+      const allGames: unknown[] = [];
       
       for (const gameCategory of gameCategories) {
         try {
