@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import AppCard from '../../components/AppCard';
 import AppCardSkeleton from '../../components/AppCardSkeleton';
 
@@ -47,7 +47,7 @@ export default function CategoryDetailClient({ category }: CategoryDetailClientP
     }
   };
 
-  const loadApps = async (isLoadMore: boolean = false) => {
+  const loadApps = useCallback(async (isLoadMore: boolean = false) => {
     try {
       if (isLoadMore) {
         setLoadingMore(true);
@@ -75,7 +75,7 @@ export default function CategoryDetailClient({ category }: CategoryDetailClientP
       setLoading(false);
       setLoadingMore(false);
     }
-  };
+  }, [apps.length, fetchApps]);
 
   const handleLoadMore = () => {
     if (!loadingMore && hasMore) {

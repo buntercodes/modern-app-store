@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { 
   LayoutDashboard, 
   Settings, 
@@ -40,7 +40,7 @@ function AdminLayoutContent({ children }: AdminLayoutProps) {
     { name: 'Security', href: '/admin/security', icon: Shield },
   ];
 
-  const handleLogout = async () => {
+  const handleLogout = useCallback(async () => {
     // Show confirmation dialog
     const confirmed = window.confirm('Are you sure you want to logout from the admin panel?');
     if (!confirmed) return;
@@ -63,7 +63,7 @@ function AdminLayoutContent({ children }: AdminLayoutProps) {
       // Still redirect even if logout fails
       router.push('/');
     }
-  };
+  }, [adminLogout, router]);
 
   // Add keyboard shortcut for logout (Ctrl+Q)
   useEffect(() => {

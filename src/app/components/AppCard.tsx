@@ -1,6 +1,7 @@
 "use client";
 
 import { Star, Download, ExternalLink } from 'lucide-react';
+import Image from 'next/image';
 import { GooglePlayApp } from '../lib/googlePlayScraper';
 
 interface AppCardProps {

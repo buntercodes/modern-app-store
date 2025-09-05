@@ -100,9 +100,9 @@ const CATEGORY_DESCRIPTIONS: { [key: string]: string } = {
 };
 
 interface CategoryPageProps {
-  params: {
+  params: Promise<{
     category: string;
-  };
+  }>;
 }
 
 export async function generateMetadata({ params }: CategoryPageProps): Promise<Metadata> {

@@ -4,6 +4,7 @@ import { Star, Download, Share2, Check, Users, Smartphone, Shield, Zap, MoreVert
 import Header from "../../components/Header";
 import Breadcrumb from "../../components/Breadcrumb";
 import { useEffect, useState, use } from "react";
+import Image from 'next/image';
 import Link from "next/link";
 import { GooglePlayApp } from "../../services/googlePlayApi";
 

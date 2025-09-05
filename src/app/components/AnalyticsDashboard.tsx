@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { 
   BarChart3, 
   Users, 
@@ -55,7 +55,7 @@ export default function AnalyticsDashboard() {
     end: new Date().toISOString().split('T')[0],
   });
 
-  const fetchAnalytics = async () => {
+  const fetchAnalytics = useCallback(async () => {
     try {
       setError(null);
       const response = await fetch(
@@ -75,7 +75,7 @@ export default function AnalyticsDashboard() {
       setLoading(false);
       setRefreshing(false);
     }
-  };
+  }, [dateRange]);
 
   useEffect(() => {
     fetchAnalytics();

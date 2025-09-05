@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from 'react';
+import Image from 'next/image';
 import { 
   Search, 
   Save, 
@@ -15,6 +16,7 @@ import { useRouter } from 'next/navigation';
 import { appwriteService } from '../../../lib/appwrite';
 import AppwriteDiagnostic from '../../../components/AppwriteDiagnostic';
 import Breadcrumb from '../../../components/Breadcrumb';
+import { useAdminAuth } from '../../../context/AdminAuthContext';
 
 interface AppLookupData {
   appId: string;
@@ -64,6 +66,7 @@ interface FormData {
 
 export default function AddAppPage() {
   const router = useRouter();
+  const { adminUser } = useAdminAuth();
   
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [packageName, setPackageName] = useState('');
@@ -139,8 +142,8 @@ export default function AddAppPage() {
 
   // Save app to Appwrite
   const handleSave = async () => {
-    if (!user) {
-      alert('You must be logged in to add apps');
+    if (!adminUser) {
+      alert('You must be logged in as admin to add apps');
       return;
     }
 
