@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { 
   LayoutDashboard, 
   Settings, 
@@ -12,21 +12,22 @@ import {
   X,
   LogOut,
   User,
-  Bell,
-  Search,
   Plus
 } from 'lucide-react';
-import { useAuth } from '../context/AuthContext';
+import { useAdminAuth } from '../context/AdminAuthContext';
 import { useRouter } from 'next/navigation';
+import AdminSignInForm from '../components/AdminSignInForm';
+import { AdminAuthProvider } from '../context/AdminAuthContext';
 // import Breadcrumb, { BreadcrumbItem } from '../components/Breadcrumb';
 
 interface AdminLayoutProps {
   children: React.ReactNode;
 }
 
-export default function AdminLayout({ children }: AdminLayoutProps) {
+function AdminLayoutContent({ children }: AdminLayoutProps) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const { user, logout } = useAuth();
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
+  const { adminUser, adminLogout, isAdminAuthenticated, authLoading } = useAdminAuth();
   const router = useRouter();
 
   const navigation = [
@@ -39,28 +40,59 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
     { name: 'Security', href: '/admin/security', icon: Shield },
   ];
 
-  const handleLogout = () => {
-    logout();
-    router.push('/login');
+  const handleLogout = async () => {
+    // Show confirmation dialog
+    const confirmed = window.confirm('Are you sure you want to logout from the admin panel?');
+    if (!confirmed) return;
+    
+    try {
+      setIsLoggingOut(true);
+      setSidebarOpen(false);
+      
+      // Perform admin logout (clears localStorage and all sessions)
+      await adminLogout();
+      
+      // Redirect to home page
+      router.push('/');
+      
+      // Force page refresh to ensure clean state
+      window.location.reload();
+    } catch (error) {
+      console.error('Logout error:', error);
+      setIsLoggingOut(false);
+      // Still redirect even if logout fails
+      router.push('/');
+    }
   };
 
-  // Check if user is admin/developer
-  if (!user || (user.role !== 'developer' && user.role !== 'admin')) {
+  // Add keyboard shortcut for logout (Ctrl+Q)
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.ctrlKey && event.key === 'q') {
+        event.preventDefault();
+        handleLogout();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
+  // Show loading state while checking admin authentication
+  if (authLoading) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
-          <Shield className="w-16 h-16 text-red-500 mx-auto mb-4" />
-          <h1 className="text-2xl font-bold text-gray-900 mb-2">Access Denied</h1>
-          <p className="text-gray-600 mb-4">You don&apos;t have permission to access the admin panel.</p>
-          <button
-            onClick={() => router.push('/')}
-            className="bg-green-500 text-white px-6 py-2 rounded-lg hover:bg-green-600 transition-colors"
-          >
-            Return to Store
-          </button>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-red-500 mx-auto mb-4"></div>
+          <p className="text-gray-600">Verifying admin access...</p>
         </div>
       </div>
     );
+  }
+
+  // Show admin sign-in form if not authenticated
+  if (!isAdminAuthenticated || !adminUser) {
+    return <AdminSignInForm />;
   }
 
   return (
@@ -76,10 +108,11 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
       )}
 
       {/* Sidebar */}
-      <div className={`fixed inset-y-0 left-0 z-50 w-64 bg-white shadow-xl transform transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:inset-0 ${
+      <div className={`fixed inset-y-0 left-0 z-50 w-64 bg-white shadow-xl transform transition-transform duration-300 ease-in-out lg:translate-x-0 lg:sticky lg:top-0 lg:h-screen lg:flex lg:flex-col ${
         sidebarOpen ? 'translate-x-0' : '-translate-x-full'
       }`}>
-        <div className="flex items-center justify-between h-16 px-6 border-b border-gray-200">
+        {/* Sidebar Header */}
+        <div className="flex items-center justify-between h-16 px-6 border-b border-gray-200 flex-shrink-0">
           <div className="flex items-center space-x-3">
             <div className="w-8 h-8 bg-green-500 rounded-lg flex items-center justify-center">
               <Shield className="w-5 h-5 text-white" />
@@ -94,7 +127,8 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
           </button>
         </div>
 
-        <nav className="mt-6 px-3">
+        {/* Navigation - Scrollable */}
+        <nav className="flex-1 px-3 py-6 overflow-y-auto">
           <div className="space-y-2">
             {navigation.map((item) => {
               const isActive = typeof window !== 'undefined' && window.location.pathname === item.href;
@@ -118,31 +152,36 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
           </div>
         </nav>
 
-        {/* User info at bottom */}
-        <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-gray-200 bg-white">
+        {/* User info at bottom - Fixed */}
+        <div className="p-4 border-t border-gray-200 bg-white flex-shrink-0">
           <div className="flex items-center space-x-3">
             <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
               <User className="w-4 h-4 text-green-600" />
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-sm font-medium text-gray-900 truncate">{user.name}</p>
-              <p className="text-xs text-gray-500 truncate">{user.role}</p>
+              <p className="text-sm font-medium text-gray-900 truncate">{adminUser.name}</p>
+              <p className="text-xs text-gray-500 truncate">Admin</p>
             </div>
             <button
               onClick={handleLogout}
-              className="p-2 text-gray-400 hover:text-gray-600 transition-colors"
+              disabled={isLoggingOut}
+              className="p-2 text-gray-400 hover:text-gray-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               title="Sign out"
             >
-              <LogOut className="w-4 h-4" />
+              {isLoggingOut ? (
+                <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-gray-400"></div>
+              ) : (
+                <LogOut className="w-4 h-4" />
+              )}
             </button>
           </div>
         </div>
       </div>
 
       {/* Main content */}
-      <div className="flex-1 min-w-0">
-        {/* Top header */}
-        <div className="sticky top-0 z-40 bg-white border-b border-gray-200 shadow-sm">
+      <div className="flex-1 min-w-0 flex flex-col">
+        {/* Top header - Sticky */}
+        <div className="sticky top-0 z-40 bg-white border-b border-gray-200 shadow-sm flex-shrink-0">
           <div className="flex items-center justify-between h-16 px-6">
             <button
               onClick={() => setSidebarOpen(true)}
@@ -151,41 +190,63 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
               <Menu className="w-5 h-5" />
             </button>
 
-            <div className="flex-1 max-w-lg lg:max-w-xs mx-6">
-              <div className="relative">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-                <input
-                  type="text"
-                  placeholder="Search admin panel..."
-                  className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent text-sm transition-colors"
-                />
-              </div>
-            </div>
+            <div className="flex-1"></div>
 
             <div className="flex items-center space-x-4">
-              <button className="p-2 text-gray-400 hover:text-gray-600 transition-colors">
-                <Bell className="w-5 h-5" />
-              </button>
+              
+              {/* Admin User Info & Logout */}
               <div className="flex items-center space-x-3">
                 <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
                   <User className="w-4 h-4 text-green-600" />
                 </div>
                 <div className="hidden sm:block text-left">
-                  <p className="text-sm font-medium text-gray-900">{user.name}</p>
-                  <p className="text-xs text-gray-500">{user.role}</p>
+                  <p className="text-sm font-medium text-gray-900">{adminUser.name}</p>
+                  <p className="text-xs text-gray-500">Admin</p>
                 </div>
+                
+                {/* Logout Button */}
+                <button
+                  onClick={handleLogout}
+                  disabled={isLoggingOut}
+                  className="inline-flex items-center px-3 py-2 border border-red-300 text-sm font-medium rounded-lg text-red-700 bg-red-50 hover:bg-red-100 hover:border-red-400 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  title="Sign out from admin panel (Ctrl+Q)"
+                >
+                  {isLoggingOut ? (
+                    <>
+                      <div className="animate-spin rounded-full h-4 w-4 mr-1 border-b-2 border-red-700"></div>
+                      <span className="hidden sm:inline">Logging out...</span>
+                    </>
+                  ) : (
+                    <>
+                      <LogOut className="w-4 h-4 mr-1" />
+                      <span className="hidden sm:inline">Logout</span>
+                    </>
+                  )}
+                </button>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Page content */}
-        <main className="py-8">
-          <div className="max-w-7xl mx-auto px-6">
-            {children}
+        {/* Page content - Scrollable */}
+        <main className="flex-1 overflow-y-auto bg-gray-50">
+          <div className="py-8">
+            <div className="max-w-7xl mx-auto px-6">
+              {children}
+            </div>
           </div>
         </main>
       </div>
     </div>
+  );
+}
+
+export default function AdminLayout({ children }: AdminLayoutProps) {
+  return (
+    <AdminAuthProvider>
+      <AdminLayoutContent>
+        {children}
+      </AdminLayoutContent>
+    </AdminAuthProvider>
   );
 }

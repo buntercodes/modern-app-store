@@ -1,15 +1,24 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import { useAuth } from '../context/AuthContext';
 import { Mail, ArrowLeft, CheckCircle, AlertCircle } from 'lucide-react';
 
 export default function ForgotPasswordPage() {
-  const { sendPasswordRecovery, loading, error } = useAuth();
+  const router = useRouter();
+  const { sendPasswordRecovery, loading, error, isAuthenticated, authLoading } = useAuth();
   
   const [email, setEmail] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Redirect to home page if user is already logged in
+  useEffect(() => {
+    if (isAuthenticated && !authLoading) {
+      router.push('/');
+    }
+  }, [isAuthenticated, authLoading, router]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -32,6 +41,18 @@ export default function ForgotPasswordPage() {
       setIsSubmitting(false);
     }
   };
+
+  // Show loading spinner while checking authentication
+  if (authLoading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-col items-center">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-green-600"></div>
+          <p className="mt-4 text-sm text-gray-600">Checking authentication...</p>
+        </div>
+      </div>
+    );
+  }
 
   if (isSubmitted) {
     return (

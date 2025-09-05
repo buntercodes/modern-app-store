@@ -100,45 +100,102 @@ class GooglePlayScraperService {
       
       let apps: Record<string, unknown>[] = [];
       
+      // Map category string to gplay category constant
+      const getCategoryConstant = (cat: string) => {
+        const categoryMap: Record<string, any> = {
+          'GAME_ACTION': gplay.category.GAME_ACTION,
+          'GAME_ADVENTURE': gplay.category.GAME_ADVENTURE,
+          'GAME_ARCADE': gplay.category.GAME_ARCADE,
+          'GAME_BOARD': gplay.category.GAME_BOARD,
+          'GAME_CARD': gplay.category.GAME_CARD,
+          'GAME_CASINO': gplay.category.GAME_CASINO,
+          'GAME_CASUAL': gplay.category.GAME_CASUAL,
+          'GAME_EDUCATIONAL': gplay.category.GAME_EDUCATIONAL,
+          'GAME_MUSIC': gplay.category.GAME_MUSIC,
+          'GAME_PUZZLE': gplay.category.GAME_PUZZLE,
+          'GAME_RACING': gplay.category.GAME_RACING,
+          'GAME_ROLE_PLAYING': gplay.category.GAME_ROLE_PLAYING,
+          'GAME_SIMULATION': gplay.category.GAME_SIMULATION,
+          'GAME_SPORTS': gplay.category.GAME_SPORTS,
+          'GAME_STRATEGY': gplay.category.GAME_STRATEGY,
+          'GAME_TRIVIA': gplay.category.GAME_TRIVIA,
+          'GAME_WORD': gplay.category.GAME_WORD,
+          'APPLICATION': gplay.category.APPLICATION,
+          'TOOLS': gplay.category.TOOLS,
+          'COMMUNICATION': gplay.category.COMMUNICATION,
+          'PRODUCTIVITY': gplay.category.PRODUCTIVITY,
+          'SOCIAL': gplay.category.SOCIAL,
+          'PHOTOGRAPHY': gplay.category.PHOTOGRAPHY,
+          'VIDEO_PLAYERS': gplay.category.VIDEO_PLAYERS,
+          'MUSIC_AND_AUDIO': gplay.category.MUSIC_AND_AUDIO,
+          'NEWS_AND_MAGAZINES': gplay.category.NEWS_AND_MAGAZINES,
+          'MAPS_AND_NAVIGATION': gplay.category.MAPS_AND_NAVIGATION,
+          'BOOKS_AND_REFERENCE': gplay.category.BOOKS_AND_REFERENCE,
+          'BUSINESS': gplay.category.BUSINESS,
+          'MEDICAL': gplay.category.MEDICAL,
+          'LIFESTYLE': gplay.category.LIFESTYLE,
+          'FINANCE': gplay.category.FINANCE,
+          'SHOPPING': gplay.category.SHOPPING,
+          'WEATHER': gplay.category.WEATHER,
+          'TRAVEL_AND_LOCAL': gplay.category.TRAVEL_AND_LOCAL,
+          'LIBRARIES_AND_DEMO': gplay.category.LIBRARIES_AND_DEMO,
+          'AUTO_AND_VEHICLES': gplay.category.AUTO_AND_VEHICLES,
+          'BEAUTY': gplay.category.BEAUTY,
+          'COMICS': gplay.category.COMICS,
+          'DATING': gplay.category.DATING,
+          'EDUCATION': gplay.category.EDUCATION,
+          'ENTERTAINMENT': gplay.category.ENTERTAINMENT,
+          'EVENTS': gplay.category.EVENTS,
+          'FOOD_AND_DRINK': gplay.category.FOOD_AND_DRINK,
+          'HOUSE_AND_HOME': gplay.category.HOUSE_AND_HOME,
+          'PARENTING': gplay.category.PARENTING,
+          'ART_AND_DESIGN': gplay.category.ART_AND_DESIGN,
+          'HEALTH_AND_FITNESS': gplay.category.HEALTH_AND_FITNESS
+        };
+        return categoryMap[cat] || gplay.category.APPLICATION;
+      };
+      
+      const categoryConstant = getCategoryConstant(category);
+      
       switch (collection) {
         case 'TOP_FREE':
           apps = await gplay.list({
-            category: category as never,
+            category: categoryConstant,
             collection: gplay.collection.TOP_FREE,
             num: limit
           });
           break;
         case 'TOP_PAID':
           apps = await gplay.list({
-            category: category as never,
+            category: categoryConstant,
             collection: gplay.collection.TOP_PAID,
             num: limit
           });
           break;
         case 'NEW_FREE':
           apps = await gplay.list({
-            category: category as never,
+            category: categoryConstant,
             collection: gplay.collection.NEW_FREE,
             num: limit
           });
           break;
         case 'NEW_PAID':
           apps = await gplay.list({
-            category: category as never,
+            category: categoryConstant,
             collection: gplay.collection.NEW_PAID,
             num: limit
           });
           break;
         case 'GROSSING':
           apps = await gplay.list({
-            category: category as never,
+            category: categoryConstant,
             collection: gplay.collection.GROSSING,
             num: limit
           });
           break;
         default:
           apps = await gplay.list({
-            category: category as never,
+            category: categoryConstant,
             collection: gplay.collection.TOP_FREE,
             num: limit
           });

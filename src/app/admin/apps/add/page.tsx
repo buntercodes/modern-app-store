@@ -13,7 +13,6 @@ import {
 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { appwriteService } from '../../../lib/appwrite';
-import { useAuth } from '../../../context/AuthContext';
 import AppwriteDiagnostic from '../../../components/AppwriteDiagnostic';
 import Breadcrumb from '../../../components/Breadcrumb';
 
@@ -65,7 +64,6 @@ interface FormData {
 
 export default function AddAppPage() {
   const router = useRouter();
-  const { user } = useAuth();
   
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [packageName, setPackageName] = useState('');

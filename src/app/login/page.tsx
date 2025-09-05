@@ -9,7 +9,7 @@ import Breadcrumb from '../components/Breadcrumb';
 
 export default function LoginPage() {
   const router = useRouter();
-  const { login, loading, error, clearError } = useAuth();
+  const { login, loading, error, clearError, isAuthenticated, authLoading } = useAuth();
   const { hasInteracted, formRef } = useFormInteraction();
   
   const [formData, setFormData] = useState({
@@ -24,6 +24,13 @@ export default function LoginPage() {
   useEffect(() => {
     clearError();
   }, [clearError]);
+
+  // Redirect to home page if user is already logged in
+  useEffect(() => {
+    if (isAuthenticated && !authLoading) {
+      router.push('/');
+    }
+  }, [isAuthenticated, authLoading, router]);
 
   // Get CSS classes for input styling
   const getInputClasses = () => {
@@ -65,6 +72,18 @@ export default function LoginPage() {
   };
 
 
+
+  // Show loading spinner while checking authentication
+  if (authLoading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-col items-center">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-green-600"></div>
+          <p className="mt-4 text-sm text-gray-600">Checking authentication...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">

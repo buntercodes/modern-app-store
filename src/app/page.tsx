@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import HybridHomePage from "./components/HybridHomePage";
+import AppLayout from "./components/AppLayout";
 
 // SEO-optimized metadata
 export const metadata: Metadata = {
@@ -194,7 +195,7 @@ export default async function Home() {
   };
 
   return (
-    <>
+    <AppLayout>
       {/* Structured Data for SEO */}
       <script
         type="application/ld+json"
@@ -209,6 +210,6 @@ export default async function Home() {
           trendingApps
         }}
       />
-    </>
+    </AppLayout>
   );
 }

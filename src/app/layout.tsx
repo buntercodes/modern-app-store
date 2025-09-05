@@ -5,6 +5,7 @@ import { AppDataProvider } from "./context/AppDataContext";
 import { AuthProvider } from "./context/AuthContext";
 import { SearchProvider } from "./context/SearchContext";
 import ErrorBoundary from "./components/ErrorBoundary";
+import { Analytics } from '@vercel/analytics/next';
 import Footer from "./components/Footer";
 
 const geistSans = Geist({
@@ -82,12 +83,8 @@ export default function RootLayout({
           <AppDataProvider>
             <AuthProvider>
               <SearchProvider>
-                <div className="min-h-screen flex flex-col">
-                  <main className="flex-1">
-                    {children}
-                  </main>
-                  <Footer />
-                </div>
+                {children}
+                <Analytics />
               </SearchProvider>
             </AuthProvider>
           </AppDataProvider>
