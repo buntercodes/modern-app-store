@@ -20,7 +20,7 @@ function VerifyEmailContent() {
 
     if (userId && secret) {
       // Handle email verification
-      handleEmailVerification(userId, secret);
+      handleEmailVerification();
     }
   }, [searchParams]);
 

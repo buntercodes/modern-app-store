@@ -3,33 +3,20 @@
 import { useState, useEffect, useCallback } from 'react';
 import AppCard from '../../components/AppCard';
 import AppCardSkeleton from '../../components/AppCardSkeleton';
-
-interface App {
-  appId: string;
-  title: string;
-  summary: string;
-  developer: string;
-  developerId: string;
-  icon: string;
-  score: number;
-  scoreText: string;
-  priceText: string;
-  free: boolean;
-  url: string;
-}
+import { GooglePlayApp } from '../../lib/googlePlayScraper';
 
 interface CategoryDetailClientProps {
   category: string;
 }
 
 export default function CategoryDetailClient({ category }: CategoryDetailClientProps) {
-  const [apps, setApps] = useState<App[]>([]);
+  const [apps, setApps] = useState<GooglePlayApp[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [hasMore, setHasMore] = useState(true);
   const [loadingMore, setLoadingMore] = useState(false);
 
-  const fetchApps = async (limit: number = 20, offset: number = 0) => {
+  const fetchApps = useCallback(async (limit: number = 20, offset: number = 0) => {
     try {
       // Use games API for GAME category, apps API for others
       const apiEndpoint = category === 'GAME' ? '/api/games/free' : '/api/apps/free';
@@ -45,7 +32,7 @@ export default function CategoryDetailClient({ category }: CategoryDetailClientP
       console.error('Error fetching apps:', err);
       throw err;
     }
-  };
+  }, [category]);
 
   const loadApps = useCallback(async (isLoadMore: boolean = false) => {
     try {

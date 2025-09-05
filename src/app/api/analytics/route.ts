@@ -17,7 +17,9 @@ export async function GET(request: NextRequest) {
     }
 
     // Rate limiting
-    const clientId = request.ip || 'unknown';
+    const clientId = request.headers.get('x-forwarded-for') || 
+                     request.headers.get('x-real-ip') || 
+                     'unknown';
     const now = Date.now();
     const windowMs = 60000; // 1 minute
     const maxRequests = 10;

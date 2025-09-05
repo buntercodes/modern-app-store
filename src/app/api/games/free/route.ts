@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { googlePlayScraper } from '../../../lib/googlePlayScraper';
+import { googlePlayScraper, GooglePlayApp } from '../../../lib/googlePlayScraper';
 
 export async function GET(request: NextRequest) {
   try {
@@ -10,7 +10,7 @@ export async function GET(request: NextRequest) {
 
     console.log(`🎮 Fetching ${limit} free Android games in category: ${category} (offset: ${offset})`);
 
-    let games: unknown[] = [];
+    let games: GooglePlayApp[] = [];
 
     if (category === 'ALL_GAMES') {
       // For "All Games", fetch from multiple game categories and combine
@@ -21,7 +21,7 @@ export async function GET(request: NextRequest) {
       ];
       
       const gamesPerCategory = Math.ceil(limit / gameCategories.length);
-      const allGames: unknown[] = [];
+      const allGames: GooglePlayApp[] = [];
       
       for (const gameCategory of gameCategories) {
         try {
