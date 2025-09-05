@@ -127,6 +127,7 @@ export default function AppDetailPage({ params }: { params: Promise<{ id: string
                   width={128}
                   height={128}
                   className="w-32 h-32 rounded-2xl object-cover mb-6"
+                  unoptimized={true}
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
                     target.style.display = 'none';

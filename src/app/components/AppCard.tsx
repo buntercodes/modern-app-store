@@ -45,6 +45,7 @@ export default function AppCard({ app, variant = 'compact', className = '' }: Ap
                 width={64}
                 height={64}
                 className="w-16 h-16 rounded-xl object-cover"
+                unoptimized={true}
                 onError={(e) => {
                   const target = e.target as HTMLImageElement;
                   target.style.display = 'none';
@@ -112,6 +113,7 @@ export default function AppCard({ app, variant = 'compact', className = '' }: Ap
             width={64}
             height={64}
             className="w-16 h-16 rounded-2xl mx-auto object-cover group-hover:scale-105 transition-transform"
+            unoptimized={true}
             onError={(e) => {
               const target = e.target as HTMLImageElement;
               target.style.display = 'none';

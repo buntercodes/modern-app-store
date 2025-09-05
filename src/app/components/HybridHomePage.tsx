@@ -178,6 +178,7 @@ export default function HybridHomePage({ initialData }: HybridHomePageProps) {
                           width={64}
                           height={64}
                           className="w-16 h-16 rounded-xl object-cover"
+                          unoptimized={true}
                         />
                       ) : (
                         <div className="bg-gradient-to-br from-green-100 to-blue-100 w-16 h-16 rounded-xl flex items-center justify-center text-white text-2xl font-bold">

@@ -205,6 +205,7 @@ export default function Header({ }: HeaderProps) {
                                     width={32}
                                     height={32}
                                     className="w-8 h-8 rounded-lg object-cover"
+                                    unoptimized={true}
                                     onError={(e) => {
                                       const target = e.target as HTMLImageElement;
                                       target.style.display = 'none';
@@ -362,6 +363,7 @@ export default function Header({ }: HeaderProps) {
                               width={32}
                               height={32}
                               className="w-8 h-8 rounded object-cover"
+                              unoptimized={true}
                               onError={(e) => {
                                 const target = e.target as HTMLImageElement;
                                 target.style.display = 'none';
